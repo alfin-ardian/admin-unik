@@ -10,14 +10,13 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@hooks": "./src/hooks",
-      "@helper": "./src/helper",
-      "@assets": "./src/assets",
-      "@router": "./src/router",
-      "@context": "./src/context",
-      "@pages": "./src/pages",
-      "@types": "./src/types",
-      "@components": "./src/components",
+      "@hooks": `${basePath}/src/hooks`,
+      "@helper": `${basePath}/src/helper`,
+      "@assets": `${basePath}/src/assets`,
+      "@router": `${basePath}/src/router`,
+      "@context": `${basePath}/src/context`,
+      types: `${basePath}/src/types`,
+      "@components": `${basePath}/src/components`,
     },
   },
 });
