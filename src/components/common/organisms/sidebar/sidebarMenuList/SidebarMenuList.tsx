@@ -1,7 +1,14 @@
 import React from "react";
 import { useMatch } from "react-router-dom";
 import { SidebarMenuListing } from "@components/common/molecules";
-import { DashboardIcon, UserIcon, StaffIcon } from "@components/common/atoms";
+import {
+  DashboardIcon,
+  UserIcon,
+  StaffIcon,
+  DaerahIcon,
+  DesaIcon,
+  KelompokIcon,
+} from "@components/common/atoms";
 
 interface Props {
   collapse?: boolean;
@@ -39,14 +46,14 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         label="Data User"
         active={isRoot}
         collapse={collapse}
-        icon={<DashboardIcon />}
+        icon={<UserIcon />}
       />
       <SidebarMenuListing
         to={"/"}
         label="Data Tim"
         active={isRoot}
         collapse={collapse}
-        icon={<DashboardIcon />}
+        icon={<StaffIcon />}
       />
       <p className="title mt-2 border-t border-b p-4">Data Master</p>
       <SidebarMenuListing
@@ -54,21 +61,29 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         label="Data Daerah"
         active={isRoot}
         collapse={collapse}
-        icon={<DashboardIcon />}
+        icon={<DaerahIcon />}
       />
       <SidebarMenuListing
         to={"/"}
         label="Data Desa"
         active={isRoot}
         collapse={collapse}
-        icon={<DashboardIcon />}
+        icon={<DesaIcon />}
       />
       <SidebarMenuListing
         to={"/"}
         label="Data Kelompok"
         active={isRoot}
         collapse={collapse}
-        icon={<DashboardIcon />}
+        icon={<KelompokIcon />}
+      />
+      <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
+      <SidebarMenuListing
+        to={"/"}
+        label="Data Iklan"
+        active={isRoot}
+        collapse={collapse}
+        icon={<KelompokIcon />}
       />
     </div>
   );
