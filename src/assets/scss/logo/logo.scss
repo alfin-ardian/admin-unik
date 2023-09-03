@@ -1,0 +1,25 @@
+.logo {
+    @apply gap-0;
+    transition: gap .3s ease-in-out;
+    
+    .secondary {
+        max-width: 0px;
+        opacity: 0;
+        transition: all .3s ease-in-out;
+    }
+}
+
+#root-view {
+    &.shown {
+        .logo {
+            @apply gap-2;
+            transition: gap .3s ease-in-out;
+            
+            .secondary {
+                opacity: 1;
+                max-width: 500px;
+                transition: all .3s ease-in-out;
+            }
+        }
+    }
+}

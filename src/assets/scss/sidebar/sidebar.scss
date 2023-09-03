@@ -1,0 +1,38 @@
+@import "sidebar-menu";
+
+#root-view {
+  .logo {
+    .icon-2 {
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    .icon-1 {
+      transition: all 0.3s ease-in-out;
+      opacity: 1;
+    }
+  }
+
+  .sidebar {
+    max-width: 100px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.shown {
+    .sidebar {
+      max-width: 300px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .logo {
+      .icon-1 {
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .icon-2 {
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+      }
+    }
+  }
+}

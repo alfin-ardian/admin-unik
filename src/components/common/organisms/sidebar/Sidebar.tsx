@@ -1,17 +1,18 @@
 import React from "react";
+import { SidebarMenuList } from "..";
+// import { Logo } from "@components/common/atoms";
 
 interface Props {
   collapse?: boolean;
 }
-export const Sidebar: React.FC<Props> = () => {
+export const Sidebar: React.FC<Props> = ({ collapse }) => {
   return (
-    <aside className="sidebar fixed overflow-y-auto bottom-0 left-0 top-0 bg-darkPrimary">
-      <div className="inner px-4 pt-4 pb-8">
+    <aside className="sidebar fixed overflow-y-auto bottom-0 left-0 top-0 bg-white">
+      <div className="inner px-4 pt-4 pb-8 text-center">
         {/* <Logo /> */}
-        logo
+        Logo
         <div className="mt-16">
-          sidebar
-          {/* <SidebarMenuList role={role} collapse={collapse} /> */}
+          <SidebarMenuList collapse={collapse} />
         </div>
       </div>
     </aside>

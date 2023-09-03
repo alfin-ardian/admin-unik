@@ -1,0 +1,25 @@
+#root-view {
+  .sidebar-menu-item {
+    @apply gap-0;
+    transition: gap 0.3s ease-in-out;
+
+    .secondary {
+      max-width: 0px;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  &.shown {
+    .sidebar-menu-item {
+      @apply gap-2;
+      transition: gap 0.3s ease-in-out;
+
+      .secondary {
+        opacity: 1;
+        max-width: 500px;
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+}
