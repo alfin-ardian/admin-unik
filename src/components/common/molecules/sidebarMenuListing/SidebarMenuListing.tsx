@@ -23,21 +23,17 @@ export const SidebarMenuListing: React.FC<Props> = ({
   to = "#",
   collapse,
 }) => {
-  const hasNoIcon = icon === undefined;
   return (
     <Link
       to={to}
       onClick={onClick}
       className={`sidebar-menu-item ${
-        hasNoIcon ? "py-2 px-3" : "p-3"
+        collapse ? "py-2 px-3" : "py-2 pl-6"
       } hover:bg-RoseRed flex items-center justify-between  ${
         active ? "bg-white" : ""
       } flex rounded-md`}
     >
-      {/* Icon is mandatory to shown */}
       <span className="w-6 h-6">{icon}</span>
-
-      {/* Secondary shown */}
       <div
         className="secondary flex justify-between items-center gap-2 flex-1"
         style={{ maxWidth: collapse ? "500px" : "" }}
