@@ -81,7 +81,7 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
       <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
       <SidebarMenuListing
         to={"/"}
-        label="Fitur Iklan"
+        label="Posting Iklan"
         active={isRoot}
         collapse={collapse}
         icon={<AdsenseIcon />}
