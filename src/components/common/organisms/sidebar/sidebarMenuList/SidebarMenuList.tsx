@@ -8,6 +8,7 @@ import {
   DaerahIcon,
   DesaIcon,
   KelompokIcon,
+  AdsenseIcon,
 } from "@components/common/atoms";
 
 interface Props {
@@ -80,10 +81,10 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
       <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
       <SidebarMenuListing
         to={"/"}
-        label="Data Iklan"
+        label="Fitur Iklan"
         active={isRoot}
         collapse={collapse}
-        icon={<KelompokIcon />}
+        icon={<AdsenseIcon />}
       />
     </div>
   );
