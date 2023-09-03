@@ -13,7 +13,7 @@ export const Sidebar: React.FC<Props> = ({ onClick, collapse }) => {
       <div className="inner px-4 pt-4 pb-8 text-center">
         {/* <Logo /> */}
         <div className="logo" onClick={() => onClick()}>
-          Logo
+          Jodoh
         </div>
         <div className="mt-16">
           <SidebarMenuList collapse={collapse} />
