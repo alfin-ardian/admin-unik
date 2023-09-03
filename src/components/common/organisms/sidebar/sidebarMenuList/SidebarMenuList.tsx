@@ -58,7 +58,7 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
       />
       <p className="title mt-2 border-t border-b p-4">Data Master</p>
       <SidebarMenuListing
-        to={"/"}
+        to={"/daerah"}
         label="Data Daerah"
         active={isRoot}
         collapse={collapse}
