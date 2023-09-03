@@ -1,4 +1,4 @@
-import { Header } from "@components/common/organisms/header/Header";
+import { Header, Sidebar } from "@components/common/organisms";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -11,7 +11,7 @@ export const RootView: React.FC = () => {
   return (
     <>
       <div id="root-view" className="shown min-h-screen font-inter">
-        {/* <Sidebar collapse={collapsed} /> */}
+        <Sidebar collapse={collapsed} />
         <Header onClick={onClick} />
         <div className="host p-8 min-h-screen">
           <Outlet />
