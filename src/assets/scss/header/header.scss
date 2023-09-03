@@ -17,7 +17,7 @@
   padding-right: 0.5rem;
   min-height: 64px;
   margin-top: 1rem;
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 0rem 1.5rem !important;
   min-height: 64px !important;
   background-color: rgba(255, 255, 255, 1);
@@ -29,7 +29,7 @@
 #root-view {
   &.shown {
     .header {
-      padding-left: 217px;
+      padding-left: 150px;
       transition: all 0.3s ease-in-out;
     }
   }

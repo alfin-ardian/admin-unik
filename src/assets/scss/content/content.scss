@@ -1,13 +1,13 @@
 #root-view {
+  .host {
+    padding-left: calc(80px + 10px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.shown {
     .host {
-        padding-left: calc(80px + 32px);
-        transition: all .3s ease-in-out;
+      padding-left: calc(200px);
+      transition: all 0.3s ease-in-out;
     }
-    
-    &.shown {
-        .host {
-            padding-left: calc(217.633px + 32px);
-            transition: all .3s ease-in-out;
-        }
-    }
+  }
 }
