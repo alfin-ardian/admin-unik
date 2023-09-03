@@ -19,6 +19,7 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         collapse={collapse}
         icon={<DashboardIcon />}
       />
+      <p className="title">Data Master</p>
     </div>
   );
 };

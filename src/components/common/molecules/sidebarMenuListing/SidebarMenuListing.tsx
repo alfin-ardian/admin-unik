@@ -30,8 +30,8 @@ export const SidebarMenuListing: React.FC<Props> = ({
       onClick={onClick}
       className={`sidebar-menu-item ${
         hasNoIcon ? "py-2 px-3" : "p-3"
-      } hover:bg-darkGold flex items-center justify-between  ${
-        active ? "bg-darkGold" : ""
+      } hover:bg-RoseRed flex items-center justify-between  ${
+        active ? "bg-white" : ""
       } flex rounded-md`}
     >
       {/* Icon is mandatory to shown */}
