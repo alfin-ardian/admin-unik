@@ -28,7 +28,7 @@ export const SidebarMenuListing: React.FC<Props> = ({
       to={to}
       onClick={onClick}
       className={`sidebar-menu-item ${
-        collapse ? "py-2 px-3" : "py-2 pl-6"
+        collapse ? "py-2 px-3" : "py-2 pl-10"
       } hover:bg-RoseRed flex items-center justify-between  ${
         active ? "bg-white" : ""
       } flex rounded-md`}
