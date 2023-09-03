@@ -7,7 +7,7 @@ interface Props {
   collapse?: boolean;
 }
 
-export const SidebarMenuList: React.FC<Props> = () => {
+export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
   const isRoot = useMatch("/") !== null;
 
   return (
@@ -16,6 +16,7 @@ export const SidebarMenuList: React.FC<Props> = () => {
         to={"/"}
         label="Dashboard"
         active={isRoot}
+        collapse={collapse}
         icon={<DashboardIcon />}
       />
     </div>

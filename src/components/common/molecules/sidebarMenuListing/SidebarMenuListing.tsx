@@ -10,6 +10,7 @@ interface Props {
   isOpen?: boolean;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   to?: To;
+  collapse?: boolean;
 }
 
 export const SidebarMenuListing: React.FC<Props> = ({
@@ -20,9 +21,9 @@ export const SidebarMenuListing: React.FC<Props> = ({
   isOpen = false,
   onClick,
   to = "#",
+  collapse,
 }) => {
   const hasNoIcon = icon === undefined;
-
   return (
     <Link
       to={to}
@@ -37,7 +38,10 @@ export const SidebarMenuListing: React.FC<Props> = ({
       <span className="w-6 h-6">{icon}</span>
 
       {/* Secondary shown */}
-      <div className="secondary flex justify-between items-center gap-2 flex-1">
+      <div
+        className="secondary flex justify-between items-center gap-2 flex-1"
+        style={{ maxWidth: collapse ? "500px" : "" }}
+      >
         <span className="whitespace-nowrap overflow-clip text-black text-xs inter">
           {label}
         </span>

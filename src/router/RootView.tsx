@@ -11,9 +11,12 @@ export const RootView: React.FC = () => {
   return (
     <>
       <div id="root-view" className="shown min-h-screen font-inter">
-        <Sidebar collapse={collapsed} />
-        <Header onClick={onClick} />
-        <div className="host p-8 min-h-screen">
+        <Sidebar collapse={collapsed} onClick={onClick} />
+        <Header collapse={collapsed} />
+        <div
+          className="host p-8 min-h-screen"
+          style={{ marginLeft: collapsed ? "100px" : "20px" }}
+        >
           <Outlet />
         </div>
       </div>
