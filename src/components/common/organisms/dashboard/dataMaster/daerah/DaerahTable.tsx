@@ -196,7 +196,12 @@ export const DaerahTable: React.FC = () => {
       title: "Aksi",
       dataIndex: "address",
       key: "address",
-      render: () => <a>Delete</a>,
+      render: () => (
+        <Space>
+          <Button>Detail</Button>
+          <Button danger>Hapus</Button>
+        </Space>
+      ),
     },
   ];
 
