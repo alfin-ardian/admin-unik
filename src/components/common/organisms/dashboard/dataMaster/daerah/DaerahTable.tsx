@@ -5,6 +5,7 @@ import type { InputRef } from "antd";
 import { Button, Input, Space, Table } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
+import { Link } from "react-router-dom";
 
 interface DataType {
   key: string;
@@ -306,7 +307,9 @@ export const DaerahTable: React.FC = () => {
       key: "address",
       render: () => (
         <Space>
-          <Button>Detail</Button>
+          <Link to={`/daerah/detail`}>
+            <Button>Detail</Button>
+          </Link>
           <Button danger>Hapus</Button>
         </Space>
       ),

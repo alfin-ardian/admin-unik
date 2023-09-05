@@ -1,5 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Login, Dashboard, Daerah } from "@components/common/pages";
+import {
+  Login,
+  Dashboard,
+  Daerah,
+  DetailDaerah,
+} from "@components/common/pages";
 import { RootView } from "./RootView";
 
 export const router = createBrowserRouter([
@@ -13,6 +18,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/daerah", element: <Daerah /> },
+      { path: "/daerah/detail", element: <DetailDaerah /> },
     ],
   },
 ]);

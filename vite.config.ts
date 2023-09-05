@@ -14,6 +14,7 @@ export default defineConfig({
       "@assets": `${basePath}/src/assets`,
       "@components": `${basePath}/src/components`,
       "@router": `${basePath}/src/router`,
+      "@utils": `${basePath}/src/utils`,
     },
   },
 });
