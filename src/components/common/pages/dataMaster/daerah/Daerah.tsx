@@ -14,12 +14,11 @@ export const Daerah: React.FC = () => {
   const { data: daerah } = useGetDaerah(filter);
 
   return (
-    <div
-      className="container mx-auto bg-white p-4"
-      style={{ borderRadius: "10px" }}
-    >
-      <BreadcrumbComp page="Data Master" subPage="Data Daerah" />
-      <div className="flex justify-end mb-2">
+    <div className="container bg-white" style={{ borderRadius: "10px" }}>
+      <div className="flex justify-start ml-2">
+        <BreadcrumbComp page="Data Master" subPage="Data Daerah" />
+      </div>
+      <div className="flex justify-end mb-2 mr-2">
         <Link
           to={"/daerah/tambah-data"}
           className="flex items-center gap-1 text-white bg-sky-600 hover:bg-sky-700 font-medium border border-sky-600 px-4 py-2 rounded-lg"
@@ -27,7 +26,9 @@ export const Daerah: React.FC = () => {
           + Tambah
         </Link>
       </div>
-      <DaerahTable daerah={daerah?.data} />
+      <div className="p-4">
+        <DaerahTable daerah={daerah?.data} />
+      </div>
     </div>
   );
 };

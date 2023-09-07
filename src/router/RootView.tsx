@@ -14,8 +14,8 @@ export const RootView: React.FC = () => {
         <Sidebar collapse={collapsed} onClick={onClick} />
         <Header collapse={collapsed} />
         <div
-          className="host p-8 min-h-screen"
-          style={{ marginLeft: collapsed ? "180px" : "150px" }}
+          className="pt-4"
+          style={{ marginLeft: collapsed ? "14rem" : "12rem" }}
         >
           <Outlet />
         </div>
