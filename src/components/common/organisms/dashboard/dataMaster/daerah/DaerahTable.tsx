@@ -264,21 +264,14 @@ export const DaerahTable: React.FC = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Nama",
+      title: "Nama Daerah",
       dataIndex: "name",
       key: "name",
-      // width: "30%",
+      width: "15%",
       ...getColumnSearchProps("name"),
     },
     {
-      title: "Tim Pernikahan",
-      dataIndex: "age",
-      key: "age",
-      // width: "20%",
-      ...getColumnSearchProps("age"),
-    },
-    {
-      title: "Whatsapp",
+      title: "Kota",
       dataIndex: "address",
       key: "address",
       ...getColumnSearchProps("address"),
@@ -294,7 +287,13 @@ export const DaerahTable: React.FC = () => {
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Kota",
+      title: "Tim Pernikahan",
+      dataIndex: "age",
+      key: "age",
+      ...getColumnSearchProps("age"),
+    },
+    {
+      title: "Whatsapp",
       dataIndex: "address",
       key: "address",
       ...getColumnSearchProps("address"),

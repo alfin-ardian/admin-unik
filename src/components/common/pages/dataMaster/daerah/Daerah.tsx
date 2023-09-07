@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 
 export const Daerah: React.FC = () => {
   return (
-    <div className="container mx-auto">
+    <div
+      className="container mx-auto bg-white p-4"
+      style={{ borderRadius: "10px" }}
+    >
       <BreadcrumbComp page="Data Master" subPage="Data Daerah" />
       <div className="flex justify-end mb-2">
         <Link
