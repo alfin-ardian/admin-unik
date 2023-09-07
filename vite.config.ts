@@ -17,6 +17,7 @@ export default defineConfig({
       "@hooks": `${basePath}/src/hooks`,
       "@utils": `${basePath}/src/utils`,
       types: `${basePath}/src/types`,
+      "@reducers": `${basePath}/src/reducers`,
     },
   },
 });

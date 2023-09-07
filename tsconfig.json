@@ -7,7 +7,8 @@
       "@router/*": ["src/router/*"],
       "@hooks/*": ["src/hooks/*"],
       "@utils/*": ["src/utils/*"],
-      "types/*": ["src/types/*"]
+      "types/*": ["src/types/*"],
+      "@reducers/*": ["src/reducers/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,

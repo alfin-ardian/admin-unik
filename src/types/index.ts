@@ -2,5 +2,8 @@ export * from "./meta";
 export * from "./error";
 export * from "./paginate";
 
-// API
+// Authentication
 export * from "./login";
+
+// Data Master
+export * from "./daerah";

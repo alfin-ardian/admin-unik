@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { DaerahTable } from "@components/common/organisms";
 import { BreadcrumbComp } from "@components/common/atoms";
 import { Link } from "react-router-dom";
 
+import { useGetDaerah } from "@hooks/api";
+
 export const Daerah: React.FC = () => {
+  const [filter] = useState({
+    orderBy: "ASC",
+    page: 1,
+    limit: 100,
+  });
+  const { data: daerah } = useGetDaerah(filter);
+
   return (
     <div
       className="container mx-auto bg-white p-4"
@@ -18,7 +27,7 @@ export const Daerah: React.FC = () => {
           + Tambah
         </Link>
       </div>
-      <DaerahTable />
+      <DaerahTable daerah={daerah?.data} />
     </div>
   );
 };

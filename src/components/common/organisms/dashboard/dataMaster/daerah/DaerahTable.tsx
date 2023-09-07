@@ -10,148 +10,25 @@ import { Link } from "react-router-dom";
 interface DataType {
   key: string;
   name: string;
-  age: number;
-  address: string;
+  city: string;
+  leader: string;
+  staff: string;
+  whatsapp_staff: string;
 }
 
 type DataIndex = keyof DataType;
-
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    age: 42,
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    address: "London No. 2 Lake Park",
-  },
-];
-
-export const DaerahTable: React.FC = () => {
+interface Props {
+  daerah: any;
+}
+export const DaerahTable: React.FC<Props> = ({ daerah }) => {
+  const dataNew: DataType[] = daerah?.map((item: any) => ({
+    key: item.id,
+    name: item.name,
+    city: item.city,
+    leader: item.leader,
+    staff: item.staff,
+    whatsapp_staff: item.whatsapp_staff,
+  }));
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
@@ -272,38 +149,38 @@ export const DaerahTable: React.FC = () => {
     },
     {
       title: "Kota",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
+      dataIndex: "city",
+      key: "city",
+      ...getColumnSearchProps("city"),
+      sorter: (a, b) => a.city.length - b.city.length,
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Keimaman",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
+      dataIndex: "leader",
+      key: "leader",
+      ...getColumnSearchProps("leader"),
+      sorter: (a, b) => a.leader.length - b.leader.length,
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Tim Pernikahan",
-      dataIndex: "age",
-      key: "age",
-      ...getColumnSearchProps("age"),
+      dataIndex: "staff",
+      key: "staff",
+      ...getColumnSearchProps("staff"),
     },
     {
       title: "Whatsapp",
-      dataIndex: "address",
-      key: "address",
-      ...getColumnSearchProps("address"),
-      sorter: (a, b) => a.address.length - b.address.length,
+      dataIndex: "whatsapp_staff",
+      key: "whatsapp_staff",
+      ...getColumnSearchProps("whatsapp_staff"),
+      sorter: (a, b) => a.whatsapp_staff.length - b.whatsapp_staff.length,
       sortDirections: ["descend", "ascend"],
     },
     {
       title: "Aksi",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "city",
+      key: "city",
       render: () => (
         <Space>
           <Link to={`/daerah/detail`}>
@@ -315,5 +192,5 @@ export const DaerahTable: React.FC = () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} />;
+  return <Table columns={columns} dataSource={dataNew} />;
 };

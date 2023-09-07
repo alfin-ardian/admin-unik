@@ -18,7 +18,6 @@ export const useLogin = async (val: LoginState) => {
 
   try {
     const response = await doLogin();
-    console.log(response, "res");
     const jsonData: LoginResponse = await response.json();
     const meta: Meta | undefined = jsonData.meta;
     const error: ErrorMessage | undefined = jsonData.error;
@@ -38,7 +37,6 @@ export const useLogin = async (val: LoginState) => {
     if (loginData != null || loginData != "" || loginData != undefined) {
       localStorage.setItem("currentUser", JSON.stringify(loginData));
       return await Promise.resolve(jsonData);
-      // return jsonData;
     }
 
     return await Promise.reject({

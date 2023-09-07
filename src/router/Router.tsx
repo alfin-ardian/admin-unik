@@ -35,7 +35,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     }
 
     if (this.state.hasError) {
-      window.location.href = "/login";
+      // window.location.href = "/login";
       return null;
     }
 

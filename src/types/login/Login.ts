@@ -13,8 +13,8 @@ export interface LoginData {
   updated_at: string;
 }
 export interface LoginResponse {
-  meta?: Meta;
-  error?: ErrorMessage;
+  meta: Meta;
+  error: ErrorMessage;
   data: LoginData;
 }
 export interface LoginState {
