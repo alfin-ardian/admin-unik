@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 export const Dashboard: React.FC = () => {
   return (
     <>
-      <div className="container mx-auto bg-white">Welcome</div>
+      <div className="container mx-auto">Welcome</div>
       <Toaster />
     </>
   );
