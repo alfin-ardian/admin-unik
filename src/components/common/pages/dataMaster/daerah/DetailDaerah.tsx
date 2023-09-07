@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
+import { API_GOOGLE_MAP } from "@utils/Config";
 import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { API_GOOGLE_MAP } from "@utils/Config";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface Props {
   text: string;
@@ -22,6 +22,8 @@ const AnyReactComponent: React.FC<Props> = ({ text, onClick, style }) => (
 );
 
 export const DetailDaerah: React.FC = () => {
+  const { state: daerahDetail } = useLocation();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [center] = useState<any>({
     lat: -7.413882,
     lng: 111.11001,
@@ -30,10 +32,20 @@ export const DetailDaerah: React.FC = () => {
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
         <div className="flex space-x-4 justify-end mb-2">
-          <Link to={`/daerah`}>
-            <Button>Kembali</Button>
-          </Link>
-          <Button htmlType="submit">Submit</Button>
+          {isEdit ? (
+            <>
+              <Button onClick={() => setIsEdit(!isEdit)}>Batal</Button>
+              <Button htmlType="submit">Submit</Button>
+            </>
+          ) : (
+            <>
+              <Link to={`/daerah`}>
+                <Button>Kembali</Button>
+              </Link>
+
+              <Button onClick={() => setIsEdit(!isEdit)}>Edit</Button>
+            </>
+          )}
         </div>
         <Form
           name="wrap"
@@ -49,61 +61,94 @@ export const DetailDaerah: React.FC = () => {
             <div className="w-1/2 pr-4">
               <Form.Item
                 label="Nama Daerah"
-                name="username"
+                name="name"
                 rules={[{ required: true }]}
               >
-                <Input />
+                <Input defaultValue={daerahDetail?.name} disabled={!isEdit} />
               </Form.Item>
               <Form.Item
                 label="Keimaman"
-                name="username"
+                name="leader"
                 rules={[{ required: true }]}
               >
-                <Input />
+                <Input defaultValue={daerahDetail?.leader} disabled={!isEdit} />
               </Form.Item>
-              <Form.Item label="Wakil Keimaman" name="username">
-                <Input />
+              <Form.Item label="Wakil Keimaman" name="vice_leader">
+                <Input
+                  defaultValue={daerahDetail?.vice_leader}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Tim Pernikahan" name="username">
-                <Input />
+              <Form.Item label="Tim Pernikahan" name="staff">
+                <Input defaultValue={daerahDetail?.staff} disabled={!isEdit} />
               </Form.Item>
-              <Form.Item label="Wakil Tim Pernikahan" name="username">
-                <Input />
+              <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
+                <Input
+                  defaultValue={daerahDetail?.vice_staff}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Provinsi" name="username">
-                <Input />
+              <Form.Item label="Provinsi" name="province">
+                <Input
+                  defaultValue={daerahDetail?.province}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Kecamatan" name="username">
-                <Input />
+              <Form.Item label="Kecamatan" name="district">
+                <Input
+                  defaultValue={daerahDetail?.district}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Latitude" name="username">
-                <Input />
+              <Form.Item label="Latitude" name="latitude">
+                <Input
+                  defaultValue={daerahDetail?.latitude}
+                  disabled={!isEdit}
+                />
               </Form.Item>
             </div>
             <div className="w-1/2 pl-4">
-              <Form.Item label="Keterangan" name="password">
-                <Input />
+              <Form.Item label="Keterangan" name="description">
+                <Input
+                  defaultValue={daerahDetail?.description}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Whatsapp KI" name="password">
-                <Input />
+              <Form.Item label="Whatsapp KI" name="whatsapp_leader">
+                <Input
+                  defaultValue={daerahDetail?.whatsapp_leader}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Whatsapp Wakil" name="password">
-                <Input />
+              <Form.Item label="Whatsapp Wakil" name="whatsapp_vice_leader">
+                <Input
+                  defaultValue={daerahDetail?.whatsapp_vice_leader}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Whatsapp Tim Pernikahan" name="password">
-                <Input />
+              <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
+                <Input
+                  defaultValue={daerahDetail?.whatsapp_staff}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Whatsapp Wakil Tim" name="password">
-                <Input />
+              <Form.Item label="Whatsapp Wakil Tim" name="whatsapp_vice_staff">
+                <Input
+                  defaultValue={daerahDetail?.whatsapp_vice_staff}
+                  disabled={!isEdit}
+                />
               </Form.Item>
-              <Form.Item label="Kab / Kota" name="password">
-                <Input />
+              <Form.Item label="Kab / Kota" name="city">
+                <Input defaultValue={daerahDetail?.city} disabled={!isEdit} />
               </Form.Item>
-              <Form.Item label="Alamat" name="password">
-                <Input />
+              <Form.Item label="Alamat" name="adress">
+                <Input defaultValue={daerahDetail?.adress} disabled={!isEdit} />
               </Form.Item>
-              <Form.Item label="Logitude" name="password">
-                <Input />
+              <Form.Item label="Logitude" name="longitude">
+                <Input
+                  defaultValue={daerahDetail?.longitude}
+                  disabled={!isEdit}
+                />
               </Form.Item>
             </div>
           </div>

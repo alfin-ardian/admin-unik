@@ -5,7 +5,7 @@ import type { InputRef } from "antd";
 import { Button, Input, Space, Table } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface DataType {
   key: string;
@@ -21,13 +21,24 @@ interface Props {
   daerah: any;
 }
 export const DaerahTable: React.FC<Props> = ({ daerah }) => {
+  const navigate = useNavigate();
   const dataNew: DataType[] = daerah?.map((item: any) => ({
-    key: item.id,
+    key: item._id,
     name: item.name,
-    city: item.city,
+    description: item.description,
     leader: item.leader,
+    whatsapp_leader: item.whatsapp_leader,
+    vice_leader: item.vice_leader,
+    whatsapp_vice_leader: item.whatsapp_vice_leader,
     staff: item.staff,
     whatsapp_staff: item.whatsapp_staff,
+    vice_staff: item.vice_staff,
+    whatsapp_vice_staff: item.whatsapp_vice_staff,
+    province: item.province,
+    city: item.city,
+    district: item.district,
+    latitude: item.latitude,
+    longitude: item.longitude,
   }));
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -181,12 +192,14 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
       title: "Aksi",
       dataIndex: "city",
       key: "city",
-      render: () => (
-        <Space>
-          <Link to={`/daerah/detail`}>
-            <Button>Detail</Button>
-          </Link>
-          <Button danger>Hapus</Button>
+      render: (value, record, index) => (
+        <Space key={index}>
+          <Button onClick={() => navigate("/daerah/detail", { state: record })}>
+            Detail
+          </Button>
+          <Button danger value={value}>
+            Hapus
+          </Button>
         </Space>
       ),
     },
