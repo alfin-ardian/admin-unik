@@ -5,7 +5,9 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@router/*": ["src/router/*"],
-      "@utils/*": ["src/utils/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@utils/*": ["src/utils/*"],
+      "types/*": ["src/types/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
