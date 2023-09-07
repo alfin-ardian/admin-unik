@@ -8,7 +8,7 @@ import type { FilterConfirmProps } from "antd/es/table/interface";
 import { useNavigate } from "react-router-dom";
 
 interface DataType {
-  key: string;
+  id: string;
   name: string;
   city: string;
   leader: string;
@@ -23,7 +23,7 @@ interface Props {
 export const DaerahTable: React.FC<Props> = ({ daerah }) => {
   const navigate = useNavigate();
   const dataNew: DataType[] = daerah?.map((item: any) => ({
-    key: item._id,
+    id: item._id,
     name: item.name,
     description: item.description,
     leader: item.leader,
@@ -37,6 +37,7 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
     province: item.province,
     city: item.city,
     district: item.district,
+    address: item.address,
     latitude: item.latitude,
     longitude: item.longitude,
   }));

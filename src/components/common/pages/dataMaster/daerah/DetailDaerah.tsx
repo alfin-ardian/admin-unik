@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { usePutDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
 import { API_GOOGLE_MAP } from "@utils/Config";
 import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
   text: string;
@@ -24,10 +26,22 @@ const AnyReactComponent: React.FC<Props> = ({ text, onClick, style }) => (
 export const DetailDaerah: React.FC = () => {
   const { state: daerahDetail } = useLocation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [dataDaerah, setDataDaerah] = useState<any>(daerahDetail);
   const [center] = useState<any>({
     lat: -7.413882,
     lng: 111.11001,
   });
+
+  const onUpdate = () => {
+    usePutDaerah(dataDaerah)
+      .then(() => {
+        toast.success("Data berhasil diupdate");
+        setIsEdit(!isEdit);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
@@ -35,7 +49,9 @@ export const DetailDaerah: React.FC = () => {
           {isEdit ? (
             <>
               <Button onClick={() => setIsEdit(!isEdit)}>Batal</Button>
-              <Button htmlType="submit">Submit</Button>
+              <Button htmlType="submit" onClick={() => onUpdate()}>
+                Submit
+              </Button>
             </>
           ) : (
             <>
@@ -64,90 +80,171 @@ export const DetailDaerah: React.FC = () => {
                 name="name"
                 rules={[{ required: true }]}
               >
-                <Input defaultValue={daerahDetail?.name} disabled={!isEdit} />
+                <Input
+                  defaultValue={dataDaerah?.name}
+                  disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, name: e.target.value })
+                  }
+                />
               </Form.Item>
               <Form.Item
                 label="Keimaman"
                 name="leader"
                 rules={[{ required: true }]}
               >
-                <Input defaultValue={daerahDetail?.leader} disabled={!isEdit} />
+                <Input
+                  defaultValue={dataDaerah?.leader}
+                  disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, leader: e.target.value })
+                  }
+                />
               </Form.Item>
               <Form.Item label="Wakil Keimaman" name="vice_leader">
                 <Input
-                  defaultValue={daerahDetail?.vice_leader}
+                  defaultValue={dataDaerah?.vice_leader}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      vice_leader: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Tim Pernikahan" name="staff">
-                <Input defaultValue={daerahDetail?.staff} disabled={!isEdit} />
+                <Input
+                  defaultValue={dataDaerah?.staff}
+                  disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, staff: e.target.value })
+                  }
+                />
               </Form.Item>
               <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
                 <Input
-                  defaultValue={daerahDetail?.vice_staff}
+                  defaultValue={dataDaerah?.vice_staff}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, vice_staff: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Provinsi" name="province">
                 <Input
-                  defaultValue={daerahDetail?.province}
+                  defaultValue={dataDaerah?.province}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, province: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
                 <Input
-                  defaultValue={daerahDetail?.district}
+                  defaultValue={dataDaerah?.district}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, district: e.target.value })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Latitude" name="latitude">
                 <Input
-                  defaultValue={daerahDetail?.latitude}
+                  defaultValue={dataDaerah?.latitude}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, latitude: e.target.value })
+                  }
                 />
               </Form.Item>
             </div>
             <div className="w-1/2 pl-4">
               <Form.Item label="Keterangan" name="description">
                 <Input
-                  defaultValue={daerahDetail?.description}
+                  defaultValue={dataDaerah?.description}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      description: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Whatsapp KI" name="whatsapp_leader">
                 <Input
-                  defaultValue={daerahDetail?.whatsapp_leader}
+                  defaultValue={dataDaerah?.whatsapp_leader}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      whatsapp_leader: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Whatsapp Wakil" name="whatsapp_vice_leader">
                 <Input
-                  defaultValue={daerahDetail?.whatsapp_vice_leader}
+                  defaultValue={dataDaerah?.whatsapp_vice_leader}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      whatsapp_vice_leader: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
-                  defaultValue={daerahDetail?.whatsapp_staff}
+                  defaultValue={dataDaerah?.whatsapp_staff}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      whatsapp_staff: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Whatsapp Wakil Tim" name="whatsapp_vice_staff">
                 <Input
-                  defaultValue={daerahDetail?.whatsapp_vice_staff}
+                  defaultValue={dataDaerah?.whatsapp_vice_staff}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({
+                      ...dataDaerah,
+                      whatsapp_vice_staff: e.target.value,
+                    })
+                  }
                 />
               </Form.Item>
               <Form.Item label="Kab / Kota" name="city">
-                <Input defaultValue={daerahDetail?.city} disabled={!isEdit} />
+                <Input
+                  defaultValue={dataDaerah?.city}
+                  disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, city: e.target.value })
+                  }
+                />
               </Form.Item>
-              <Form.Item label="Alamat" name="adress">
-                <Input defaultValue={daerahDetail?.adress} disabled={!isEdit} />
+              <Form.Item label="Alamat" name="address">
+                <Input
+                  defaultValue={dataDaerah?.address}
+                  disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, address: e.target.value })
+                  }
+                />
               </Form.Item>
               <Form.Item label="Logitude" name="longitude">
                 <Input
-                  defaultValue={daerahDetail?.longitude}
+                  defaultValue={dataDaerah?.longitude}
                   disabled={!isEdit}
+                  onChange={(e) =>
+                    setDataDaerah({ ...dataDaerah, longitude: e.target.value })
+                  }
                 />
               </Form.Item>
             </div>
@@ -176,6 +273,7 @@ export const DetailDaerah: React.FC = () => {
           </GoogleMapReact>
         </div>
       </div>
+      <Toaster />
     </>
   );
 };
