@@ -6,12 +6,42 @@ import {
   DetailDaerah,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
+import { Component } from "react";
 
-// check token in localStorage, otherwise redirect to login page
-const isTokenValid = () => {
-  const token = localStorage.getItem("token");
-  return !!token;
-};
+// const navigate = useNavigate();
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  render() {
+    const currentUser = window.localStorage.getItem("currentUser");
+    if (!currentUser) {
+      window.location.href = "/login";
+      return null;
+    }
+
+    if (this.state.hasError) {
+      window.location.href = "/login";
+      return null;
+    }
+
+    return this.props.children;
+  }
+}
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +50,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: isTokenValid() ? <RootView /> : <Login />,
+    element: (
+      <ErrorBoundary>
+        <RootView />
+      </ErrorBoundary>
+    ),
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/daerah", element: <Daerah /> },

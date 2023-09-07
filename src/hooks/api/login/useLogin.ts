@@ -36,8 +36,9 @@ export const useLogin = async (val: LoginState) => {
     }
     const loginData: LoginData | string | undefined | null = jsonData.data;
     if (loginData != null || loginData != "" || loginData != undefined) {
-      localStorage.setItem("token", JSON.stringify(loginData.access_token));
-      return await Promise.resolve(loginData);
+      localStorage.setItem("currentUser", JSON.stringify(loginData));
+      return await Promise.resolve(jsonData);
+      // return jsonData;
     }
 
     return await Promise.reject({

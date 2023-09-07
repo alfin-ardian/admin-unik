@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { useLogin } from "@hooks/api";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({ username: "", password: "" });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginData, "loginData");
     useLogin(loginData)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err, "err");
         toast.error(err.message);
       });
   };
