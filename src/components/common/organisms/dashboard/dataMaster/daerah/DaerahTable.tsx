@@ -153,6 +153,18 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
 
   const columns: ColumnsType<DataType> = [
     {
+      title: "No",
+      dataIndex: "id",
+      key: "id",
+      width: "5%",
+      ...getColumnSearchProps("id"),
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <span>{index + 1}</span>
+        </Space>
+      ),
+    },
+    {
       title: "Nama Daerah",
       dataIndex: "name",
       key: "name",

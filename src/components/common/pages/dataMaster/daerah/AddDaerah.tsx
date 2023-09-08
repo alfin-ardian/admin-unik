@@ -4,7 +4,7 @@ import GoogleMapReact from "google-map-react";
 import { API_GOOGLE_MAP } from "@utils/Config";
 import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 interface Props {
