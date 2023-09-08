@@ -16,8 +16,8 @@ export interface DaerahData {
   city: string;
   district: string;
   address: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   created_at: string;
   updated_at: string;
 }

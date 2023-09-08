@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePutDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
 import { API_GOOGLE_MAP } from "@utils/Config";
@@ -27,10 +27,19 @@ export const DetailDaerah: React.FC = () => {
   const { state: daerahDetail } = useLocation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [dataDaerah, setDataDaerah] = useState<any>(daerahDetail);
-  const [center] = useState<any>({
-    lat: -7.413882,
-    lng: 111.11001,
+  const [center, setCenter] = useState<any>({
+    lat: dataDaerah?.latitude,
+    lng: dataDaerah?.longitude,
   });
+
+  useEffect(() => {
+    setCenter({
+      lat: dataDaerah?.latitude,
+      lng: dataDaerah?.longitude,
+    });
+  }, [dataDaerah]);
+
+  console.log(dataDaerah, "dataDaerah");
 
   const onUpdate = () => {
     usePutDaerah(dataDaerah)
