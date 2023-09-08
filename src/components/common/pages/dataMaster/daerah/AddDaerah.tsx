@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import type { SelectProps } from "antd";
 import { usePostDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
 import { useNavigate } from "react-router-dom";
 import { API_GOOGLE_MAP } from "@utils/Config";
 import toast, { Toaster } from "react-hot-toast";
-import { Button, Form, Input, Tooltip, Select } from "antd";
-import type { SelectProps } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { State, City } from "country-state-city";
+import { Button, Form, Input, Tooltip, Select } from "antd";
+import { useGetProvinces, useGetRegencies } from "@hooks/api";
 
 interface Props {
   text: string;
@@ -33,19 +33,23 @@ export const AddDaerah: React.FC = () => {
     lng: 111.11001,
   });
 
-  const [state] = useState<any>(State.getStatesOfCountry("ID"));
-  const [city, setCity] = useState<any>(City.getCitiesOfState("ID", "JT"));
+  const dataProvinces = useGetProvinces();
+  const dataRegencies = useGetRegencies();
   const options: SelectProps["options"] = [];
   const optionsCity: SelectProps["options"] = [];
-  state.map((item: any) => {
-    options.push({ value: item.name, label: item.name, key: item.isoCode });
+  const [regencies, setRegencies] = useState<any>({ province_code: "" });
+  dataProvinces?.data?.map((item: any) => {
+    options.push({ value: item.name, label: item.name, key: item.code });
   });
-  city.map((item: any) => {
-    optionsCity.push({ value: item.name, label: item.name });
+
+  dataRegencies?.data?.map((item: any) => {
+    if (item.province_code == regencies.province_code) {
+      optionsCity.push({ value: item.name, label: item.name, key: item.code });
+    }
   });
 
   const handleChangeProvince = (value: string, e: any) => {
-    setCity(City.getCitiesOfState("ID", e.key));
+    setRegencies({ province_code: e.key });
     setDataDaerah({ ...dataDaerah, province: value, city: "" });
   };
 
@@ -93,7 +97,7 @@ export const AddDaerah: React.FC = () => {
               >
                 <Input
                   defaultValue={dataDaerah?.name}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, name: e.target.value })
                   }
                 />
@@ -105,7 +109,7 @@ export const AddDaerah: React.FC = () => {
               >
                 <Input
                   defaultValue={dataDaerah?.leader}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, leader: e.target.value })
                   }
                 />
@@ -113,7 +117,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Wakil Keimaman" name="vice_leader">
                 <Input
                   defaultValue={dataDaerah?.vice_leader}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       vice_leader: e.target.value,
@@ -124,7 +128,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Tim Pernikahan" name="staff">
                 <Input
                   defaultValue={dataDaerah?.staff}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, staff: e.target.value })
                   }
                 />
@@ -132,7 +136,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
                 <Input
                   defaultValue={dataDaerah?.vice_staff}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, vice_staff: e.target.value })
                   }
                 />
