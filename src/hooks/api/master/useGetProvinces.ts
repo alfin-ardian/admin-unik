@@ -1,8 +1,3 @@
-import {
-  type DaerahResponse,
-  type DaerahFetchState,
-  type DaerahFetchAction,
-} from "types/index";
 import { useFetch } from "..";
 import { toast } from "react-hot-toast";
 import { getCurrentUser } from "@hooks/api";
@@ -11,13 +6,14 @@ import { useEffect, useReducer } from "react";
 import { daerahFetchReducer } from "@reducers/daerah/Daerah";
 
 export const useGetProvinces = () => {
-  const [state, dispatch] = useReducer<
-    (state: DaerahFetchState, action: DaerahFetchAction) => DaerahFetchState
-  >(daerahFetchReducer, {
-    data: null,
-    error: null,
-    loading: true,
-  });
+  const [state, dispatch] = useReducer<(state: any, action: any) => any>(
+    daerahFetchReducer,
+    {
+      data: null,
+      error: null,
+      loading: true,
+    }
+  );
   const getAllProvinces = useFetch("/master/provinces");
   let token: string;
   const user: LoginData = getCurrentUser();
@@ -28,7 +24,7 @@ export const useGetProvinces = () => {
   const fetchData = async () => {
     try {
       const response = await getAllProvinces(token);
-      const jsonData: DaerahResponse = await response.json();
+      const jsonData: any = await response.json();
 
       return await Promise.resolve(jsonData);
     } catch (err) {
@@ -39,7 +35,7 @@ export const useGetProvinces = () => {
   useEffect(() => {
     dispatch({ type: "FETCH_DAERAH_LIST", data: null });
     toast
-      .promise<DaerahResponse>(
+      .promise<any>(
         fetchData(),
         {
           error: "Loading error...",
