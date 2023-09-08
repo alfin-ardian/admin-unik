@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { Button, Form, Input, Tooltip, Select } from "antd";
 import type { SelectProps } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { Country, State, City } from "country-state-city";
+import { State, City } from "country-state-city";
 
 interface Props {
   text: string;
@@ -33,7 +33,7 @@ export const AddDaerah: React.FC = () => {
     lng: 111.11001,
   });
 
-  const [state, setState] = useState<any>(State.getStatesOfCountry("ID"));
+  const [state] = useState<any>(State.getStatesOfCountry("ID"));
   const [city, setCity] = useState<any>(City.getCitiesOfState("ID", "JT"));
   const options: SelectProps["options"] = [];
   const optionsCity: SelectProps["options"] = [];
@@ -225,7 +225,7 @@ export const AddDaerah: React.FC = () => {
                   style={{ width: "100%" }}
                   placeholder="Pilih Kota / Kabupaten"
                   value={dataDaerah?.city}
-                  onChange={handleChangeProvince}
+                  onChange={handleChangeCity}
                   options={optionsCity}
                 />
               </Form.Item>
