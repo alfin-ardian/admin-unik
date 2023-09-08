@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { SelectProps } from "antd";
 import { usePostDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { EnvironmentFilled } from "@ant-design/icons";
 import { Button, Form, Input, Tooltip, Select } from "antd";
 import { useGetProvinces, useGetRegencies } from "@hooks/api";
+import { SelectProvinces } from "@components/common/atoms";
 
 interface Props {
   text: string;
@@ -37,21 +38,17 @@ export const AddDaerah: React.FC = () => {
   const dataRegencies = useGetRegencies();
   const options: SelectProps["options"] = [];
   const optionsCity: SelectProps["options"] = [];
-  const [regencies, setRegencies] = useState<any>({ province_code: "" });
+  const [provinces, setProvinces] = useState<any>({ province_code: "" });
+  // const [regencies, setRegencies] = useState<any>({ province_code: "" });
   dataProvinces?.data?.map((item: any) => {
     options.push({ value: item.name, label: item.name, key: item.code });
   });
 
   dataRegencies?.data?.map((item: any) => {
-    if (item.province_code == regencies.province_code) {
+    if (item.province_code == provinces.province_code) {
       optionsCity.push({ value: item.name, label: item.name, key: item.code });
     }
   });
-
-  const handleChangeProvince = (value: string, e: any) => {
-    setRegencies({ province_code: e.key });
-    setDataDaerah({ ...dataDaerah, province: value, city: "" });
-  };
 
   const handleChangeCity = (value: string) => {
     setDataDaerah({ ...dataDaerah, city: value });
@@ -69,6 +66,15 @@ export const AddDaerah: React.FC = () => {
         toast.error(err.meta.message);
       });
   };
+
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      provinces: provinces.name,
+    });
+  }, [provinces]);
+
+  console.log(dataDaerah, "dataDaerah");
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
@@ -142,18 +148,22 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Provinsi" name="province">
-                <Select
+                {/* <Select
                   showSearch
                   style={{ width: "100%" }}
                   placeholder="Pilih Provinsi"
                   onChange={handleChangeProvince}
                   options={options}
+                /> */}
+                <SelectProvinces
+                  setProvinces={setProvinces}
+                  // regencies={regencies}
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
                 <Input
                   defaultValue={dataDaerah?.district}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, district: e.target.value })
                   }
                 />
@@ -161,7 +171,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Latitude" name="latitude">
                 <Input
                   defaultValue={dataDaerah?.latitude}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, latitude: e.target.value })
                   }
                 />
@@ -171,7 +181,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Keterangan" name="description">
                 <Input
                   defaultValue={dataDaerah?.description}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       description: e.target.value,
@@ -182,7 +192,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Whatsapp KI" name="whatsapp_leader">
                 <Input
                   defaultValue={dataDaerah?.whatsapp_leader}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       whatsapp_leader: e.target.value,
@@ -193,7 +203,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Whatsapp Wakil" name="whatsapp_vice_leader">
                 <Input
                   defaultValue={dataDaerah?.whatsapp_vice_leader}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       whatsapp_vice_leader: e.target.value,
@@ -204,7 +214,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
                   defaultValue={dataDaerah?.whatsapp_staff}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       whatsapp_staff: e.target.value,
@@ -215,7 +225,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Whatsapp Wakil Tim" name="whatsapp_vice_staff">
                 <Input
                   defaultValue={dataDaerah?.whatsapp_vice_staff}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({
                       ...dataDaerah,
                       whatsapp_vice_staff: e.target.value,
@@ -236,7 +246,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Alamat" name="address">
                 <Input
                   defaultValue={dataDaerah?.address}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, address: e.target.value })
                   }
                 />
@@ -244,7 +254,7 @@ export const AddDaerah: React.FC = () => {
               <Form.Item label="Logitude" name="longitude">
                 <Input
                   defaultValue={dataDaerah?.longitude}
-                  onChange={(e) =>
+                  onChange={(e: any) =>
                     setDataDaerah({ ...dataDaerah, longitude: e.target.value })
                   }
                 />
