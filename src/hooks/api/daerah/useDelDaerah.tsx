@@ -3,7 +3,7 @@ import { useFetch } from "..";
 import { type LoginData } from "types/login";
 import { getCurrentUser } from "@hooks/api";
 
-export const usePostDaerah = async (val: any) => {
+export const useDelDaerah = async (id: string) => {
   let token: string | undefined = "";
   let cookie: string | undefined = "";
   const user: LoginData = getCurrentUser();
@@ -12,18 +12,18 @@ export const usePostDaerah = async (val: any) => {
     cookie = "refresh_token=" + user.refresh_token;
   }
 
-  const addData = useFetch(`/daerah`, {
-    method: "POST",
+  const updateData = useFetch(`/daerah/${id}`, {
+    method: "DELETE",
     headers: {
       "Content-Type": "application/json",
       Cookie: cookie,
     },
-    body: JSON.stringify(val),
   });
 
   try {
-    const response = await addData(token);
+    const response = await updateData(token);
     const jsonData = await response.json();
+    console.log(jsonData, "ini json data");
     if (jsonData.meta.status !== 200) {
       return await Promise.reject(jsonData);
     }

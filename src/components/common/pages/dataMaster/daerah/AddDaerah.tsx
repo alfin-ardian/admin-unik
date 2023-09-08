@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { usePostDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
-import { API_GOOGLE_MAP } from "@utils/Config";
-import { Button, Form, Input, Tooltip } from "antd";
-import { EnvironmentFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { API_GOOGLE_MAP } from "@utils/Config";
 import toast, { Toaster } from "react-hot-toast";
+import { Button, Form, Input, Tooltip, Select } from "antd";
+import type { SelectProps } from "antd";
+import { EnvironmentFilled } from "@ant-design/icons";
+import { Country, State, City } from "country-state-city";
 
 interface Props {
   text: string;
@@ -30,6 +32,26 @@ export const AddDaerah: React.FC = () => {
     lat: -7.413882,
     lng: 111.11001,
   });
+
+  const [state, setState] = useState<any>(State.getStatesOfCountry("ID"));
+  const [city, setCity] = useState<any>(City.getCitiesOfState("ID", "JT"));
+  const options: SelectProps["options"] = [];
+  const optionsCity: SelectProps["options"] = [];
+  state.map((item: any) => {
+    options.push({ value: item.name, label: item.name, key: item.isoCode });
+  });
+  city.map((item: any) => {
+    optionsCity.push({ value: item.name, label: item.name });
+  });
+
+  const handleChangeProvince = (value: string, e: any) => {
+    setCity(City.getCitiesOfState("ID", e.key));
+    setDataDaerah({ ...dataDaerah, province: value, city: "" });
+  };
+
+  const handleChangeCity = (value: string) => {
+    setDataDaerah({ ...dataDaerah, city: value });
+  };
 
   const onUpdate = () => {
     usePostDaerah(dataDaerah)
@@ -116,11 +138,12 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Provinsi" name="province">
-                <Input
-                  defaultValue={dataDaerah?.province}
-                  onChange={(e) =>
-                    setDataDaerah({ ...dataDaerah, province: e.target.value })
-                  }
+                <Select
+                  showSearch
+                  style={{ width: "100%" }}
+                  placeholder="Pilih Provinsi"
+                  onChange={handleChangeProvince}
+                  options={options}
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
@@ -197,11 +220,13 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Kab / Kota" name="city">
-                <Input
-                  defaultValue={dataDaerah?.city}
-                  onChange={(e) =>
-                    setDataDaerah({ ...dataDaerah, city: e.target.value })
-                  }
+                <Select
+                  showSearch
+                  style={{ width: "100%" }}
+                  placeholder="Pilih Kota / Kabupaten"
+                  value={dataDaerah?.city}
+                  onChange={handleChangeProvince}
+                  options={optionsCity}
                 />
               </Form.Item>
               <Form.Item label="Alamat" name="address">

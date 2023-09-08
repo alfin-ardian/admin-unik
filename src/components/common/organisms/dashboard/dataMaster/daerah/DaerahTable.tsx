@@ -1,11 +1,13 @@
-import { SearchOutlined } from "@ant-design/icons";
-import React, { useRef, useState } from "react";
-import Highlighter from "react-highlight-words";
 import type { InputRef } from "antd";
+import { useDelDaerah } from "@hooks/api";
+import { useNavigate } from "react-router-dom";
+import Highlighter from "react-highlight-words";
+import React, { useRef, useState } from "react";
+import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 interface DataType {
   id: string;
@@ -58,6 +60,20 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
   const handleReset = (clearFilters: () => void) => {
     clearFilters();
     setSearchText("");
+  };
+
+  const onDeleteData = (id: string) => {
+    console.log(id, "ini id");
+    useDelDaerah(id)
+      .then(() => {
+        toast.success("Data berhasil dihapus");
+        setTimeout(() => {
+          navigate(0);
+        }, 1000);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const getColumnSearchProps = (
@@ -210,7 +226,7 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
           <Button onClick={() => navigate("/daerah/detail", { state: record })}>
             Detail
           </Button>
-          <Button danger value={value}>
+          <Button danger value={value} onClick={() => onDeleteData(record.id)}>
             Hapus
           </Button>
         </Space>
@@ -218,5 +234,10 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
     },
   ];
 
-  return <Table columns={columns} dataSource={dataNew} />;
+  return (
+    <>
+      <Table columns={columns} dataSource={dataNew} />
+      <Toaster />
+    </>
+  );
 };
