@@ -3,6 +3,7 @@ import {
   Login,
   Dashboard,
   Daerah,
+  AddDaerah,
   DetailDaerah,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/daerah", element: <Daerah /> },
+      { path: "/daerah/tambah", element: <AddDaerah /> },
       { path: "/daerah/detail", element: <DetailDaerah /> },
     ],
   },
