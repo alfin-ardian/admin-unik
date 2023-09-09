@@ -5,6 +5,7 @@ import {
   Daerah,
   AddDaerah,
   DetailDaerah,
+  Desa,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
 import { Component } from "react";
@@ -61,6 +62,7 @@ export const router = createBrowserRouter([
       { path: "/daerah", element: <Daerah /> },
       { path: "/daerah/tambah", element: <AddDaerah /> },
       { path: "/daerah/detail", element: <DetailDaerah /> },
+      { path: "/desa", element: <Desa /> },
     ],
   },
 ]);

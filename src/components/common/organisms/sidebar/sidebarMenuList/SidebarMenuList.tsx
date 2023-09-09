@@ -65,7 +65,7 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         icon={<DaerahIcon />}
       />
       <SidebarMenuListing
-        to={"/"}
+        to={"/desa"}
         label="Data Desa"
         active={isRoot}
         collapse={collapse}
