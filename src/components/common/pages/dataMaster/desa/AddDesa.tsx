@@ -1,4 +1,4 @@
-import { usePostDaerah } from "@hooks/api";
+import { usePostDesa } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
 import { useNavigate } from "react-router-dom";
 import { API_GOOGLE_MAP } from "@utils/Config";
@@ -10,6 +10,7 @@ import {
   SelectProvinces,
   SelectRegencies,
   SelectDistricts,
+  SelectDaerah,
 } from "@components/common/atoms";
 
 interface Props {
@@ -30,7 +31,6 @@ const AnyReactComponent: React.FC<Props> = ({ text, onClick, style }) => (
 
 export const AddDesa: React.FC = () => {
   const navigate = useNavigate();
-  const [dataDaerah, setDataDaerah] = useState<any>({});
   const [center] = useState<any>({
     lat: -7.413882,
     lng: 111.11001,
@@ -39,32 +39,41 @@ export const AddDesa: React.FC = () => {
   const [provinces, setProvinces] = useState<any>({});
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
+  const [dataDesa, setDataDesa] = useState<any>({});
+  const [daerah, setDaerah] = useState<any>({});
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
+    setDataDesa({
+      ...dataDesa,
       provinces: provinces.name,
     });
     setRegencies({ ...regencies, province_code: provinces.province_code });
   }, [provinces]);
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      regencies: regencies.name,
+    setDataDesa({
+      ...dataDesa,
+      city: regencies.name,
     });
     setDistricts({ ...districts, regency_code: regencies.regency_code });
   }, [regencies]);
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
+    setDataDesa({
+      ...dataDesa,
       districts: districts.name,
     });
   }, [districts]);
 
+  useEffect(() => {
+    setDataDesa({
+      ...dataDesa,
+      daerah: daerah,
+    });
+  }, [dataDesa]);
+
   const onUpdate = () => {
-    usePostDaerah(dataDaerah)
+    usePostDesa(dataDesa)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {
@@ -98,16 +107,11 @@ export const AddDesa: React.FC = () => {
           <div className="flex">
             <div className="w-1/2 pr-4">
               <Form.Item
-                label="Nama Desa"
+                label="Pilih Daerah"
                 name="name"
                 rules={[{ required: true }]}
               >
-                <Input
-                  defaultValue={dataDaerah?.name}
-                  onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, name: e.target.value })
-                  }
-                />
+                <SelectDaerah setDaerah={setDaerah} daerah={daerah} />
               </Form.Item>
               <Form.Item
                 label="Keimaman"
@@ -115,18 +119,18 @@ export const AddDesa: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  defaultValue={dataDaerah?.leader}
+                  defaultValue={dataDesa?.leader}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, leader: e.target.value })
+                    setDataDesa({ ...dataDesa, leader: e.target.value })
                   }
                 />
               </Form.Item>
               <Form.Item label="Wakil Keimaman" name="vice_leader">
                 <Input
-                  defaultValue={dataDaerah?.vice_leader}
+                  defaultValue={dataDesa?.vice_leader}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
+                    setDataDesa({
+                      ...dataDesa,
                       vice_leader: e.target.value,
                     })
                   }
@@ -134,17 +138,17 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Tim Pernikahan" name="staff">
                 <Input
-                  defaultValue={dataDaerah?.staff}
+                  defaultValue={dataDesa?.staff}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, staff: e.target.value })
+                    setDataDesa({ ...dataDesa, staff: e.target.value })
                   }
                 />
               </Form.Item>
               <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
                 <Input
-                  defaultValue={dataDaerah?.vice_staff}
+                  defaultValue={dataDesa?.vice_staff}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, vice_staff: e.target.value })
+                    setDataDesa({ ...dataDesa, vice_staff: e.target.value })
                   }
                 />
               </Form.Item>
@@ -162,31 +166,35 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Latitude" name="latitude">
                 <Input
-                  defaultValue={dataDaerah?.latitude}
+                  defaultValue={dataDesa?.latitude}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, latitude: e.target.value })
+                    setDataDesa({ ...dataDesa, latitude: e.target.value })
                   }
                 />
               </Form.Item>
             </div>
             <div className="w-1/2 pl-4">
-              <Form.Item label="Keterangan" name="description">
+              <Form.Item
+                label="Nama Desa"
+                name="name"
+                rules={[{ required: true }]}
+              >
                 <Input
-                  defaultValue={dataDaerah?.description}
+                  defaultValue={dataDesa?.name}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
-                      description: e.target.value,
+                    setDataDesa({
+                      ...dataDesa,
+                      name: e.target.value,
                     })
                   }
                 />
               </Form.Item>
               <Form.Item label="Whatsapp KI" name="whatsapp_leader">
                 <Input
-                  defaultValue={dataDaerah?.whatsapp_leader}
+                  defaultValue={dataDesa?.whatsapp_leader}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
+                    setDataDesa({
+                      ...dataDesa,
                       whatsapp_leader: e.target.value,
                     })
                   }
@@ -194,10 +202,10 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Wakil" name="whatsapp_vice_leader">
                 <Input
-                  defaultValue={dataDaerah?.whatsapp_vice_leader}
+                  defaultValue={dataDesa?.whatsapp_vice_leader}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
+                    setDataDesa({
+                      ...dataDesa,
                       whatsapp_vice_leader: e.target.value,
                     })
                   }
@@ -205,10 +213,10 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
-                  defaultValue={dataDaerah?.whatsapp_staff}
+                  defaultValue={dataDesa?.whatsapp_staff}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
+                    setDataDesa({
+                      ...dataDesa,
                       whatsapp_staff: e.target.value,
                     })
                   }
@@ -216,10 +224,10 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Wakil Tim" name="whatsapp_vice_staff">
                 <Input
-                  defaultValue={dataDaerah?.whatsapp_vice_staff}
+                  defaultValue={dataDesa?.whatsapp_vice_staff}
                   onChange={(e: any) =>
-                    setDataDaerah({
-                      ...dataDaerah,
+                    setDataDesa({
+                      ...dataDesa,
                       whatsapp_vice_staff: e.target.value,
                     })
                   }
@@ -233,17 +241,17 @@ export const AddDesa: React.FC = () => {
               </Form.Item>
               <Form.Item label="Alamat" name="address">
                 <Input
-                  defaultValue={dataDaerah?.address}
+                  defaultValue={dataDesa?.address}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, address: e.target.value })
+                    setDataDesa({ ...dataDesa, address: e.target.value })
                   }
                 />
               </Form.Item>
               <Form.Item label="Logitude" name="longitude">
                 <Input
-                  defaultValue={dataDaerah?.longitude}
+                  defaultValue={dataDesa?.longitude}
                   onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, longitude: e.target.value })
+                    setDataDesa({ ...dataDesa, longitude: e.target.value })
                   }
                 />
               </Form.Item>
