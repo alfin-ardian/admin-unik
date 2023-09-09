@@ -10,11 +10,11 @@ export const SelectProvinces: React.FC<Props> = ({ setProvinces }) => {
   const dataProvinces = useGetProvinces();
   const options: SelectProps["options"] = [];
   dataProvinces?.data?.map((item: any) => {
-    options.push({ value: item.name, label: item.name, key: item.code });
+    options.push({ value: item.name, label: item.name, code: item.code });
   });
 
   const handleChangeProvince = (value: string, e: any) => {
-    setProvinces({ name: value, province_code: e.key });
+    setProvinces({ name: value, province_code: e.code });
   };
 
   return (

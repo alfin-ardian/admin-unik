@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { EnvironmentFilled } from "@ant-design/icons";
 import { Button, Form, Input, Tooltip, Select } from "antd";
 import { useGetProvinces, useGetRegencies } from "@hooks/api";
-import { SelectProvinces } from "@components/common/atoms";
+import { SelectProvinces, SelectRegencies } from "@components/common/atoms";
 
 interface Props {
   text: string;
@@ -39,7 +39,7 @@ export const AddDaerah: React.FC = () => {
   const options: SelectProps["options"] = [];
   const optionsCity: SelectProps["options"] = [];
   const [provinces, setProvinces] = useState<any>({ province_code: "" });
-  // const [regencies, setRegencies] = useState<any>({ province_code: "" });
+  const [regencies, setRegencies] = useState<any>({ province_code: "" });
   dataProvinces?.data?.map((item: any) => {
     options.push({ value: item.name, label: item.name, key: item.code });
   });
@@ -72,9 +72,9 @@ export const AddDaerah: React.FC = () => {
       ...dataDaerah,
       provinces: provinces.name,
     });
+    setRegencies({ ...regencies, province_code: provinces.province_code });
   }, [provinces]);
 
-  console.log(dataDaerah, "dataDaerah");
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
@@ -234,13 +234,17 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Kab / Kota" name="city">
-                <Select
+                {/* <Select
                   showSearch
                   style={{ width: "100%" }}
                   placeholder="Pilih Kota / Kabupaten"
                   value={dataDaerah?.city}
                   onChange={handleChangeCity}
-                  options={optionsCity}
+                options={optionsCity}
+                /> */}
+                <SelectRegencies
+                  setRegencies={setRegencies}
+                  regencies={regencies}
                 />
               </Form.Item>
               <Form.Item label="Alamat" name="address">
