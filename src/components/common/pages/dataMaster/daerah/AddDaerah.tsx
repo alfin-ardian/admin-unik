@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import type { SelectProps } from "antd";
 import { usePostDaerah } from "@hooks/api";
 import GoogleMapReact from "google-map-react";
 import { useNavigate } from "react-router-dom";
 import { API_GOOGLE_MAP } from "@utils/Config";
 import toast, { Toaster } from "react-hot-toast";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { Button, Form, Input, Tooltip, Select } from "antd";
-import { useGetProvinces, useGetRegencies } from "@hooks/api";
-import { SelectProvinces, SelectRegencies } from "@components/common/atoms";
+import {
+  SelectProvinces,
+  SelectRegencies,
+  SelectDistricts,
+} from "@components/common/atoms";
 
 interface Props {
   text: string;
@@ -34,25 +36,32 @@ export const AddDaerah: React.FC = () => {
     lng: 111.11001,
   });
 
-  const dataProvinces = useGetProvinces();
-  const dataRegencies = useGetRegencies();
-  const options: SelectProps["options"] = [];
-  const optionsCity: SelectProps["options"] = [];
-  const [provinces, setProvinces] = useState<any>({ province_code: "" });
+  const [provinces, setProvinces] = useState<any>({});
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
-  dataProvinces?.data?.map((item: any) => {
-    options.push({ value: item.name, label: item.name, key: item.code });
-  });
+  const [districts, setDistricts] = useState<any>({ regency_code: "" });
 
-  dataRegencies?.data?.map((item: any) => {
-    if (item.province_code == provinces.province_code) {
-      optionsCity.push({ value: item.name, label: item.name, key: item.code });
-    }
-  });
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      provinces: provinces.name,
+    });
+    setRegencies({ ...regencies, province_code: provinces.province_code });
+  }, [provinces]);
 
-  const handleChangeCity = (value: string) => {
-    setDataDaerah({ ...dataDaerah, city: value });
-  };
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      regencies: regencies.name,
+    });
+    setDistricts({ ...districts, regency_code: regencies.regency_code });
+  }, [regencies]);
+
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      districts: districts.name,
+    });
+  }, [districts]);
 
   const onUpdate = () => {
     usePostDaerah(dataDaerah)
@@ -66,14 +75,6 @@ export const AddDaerah: React.FC = () => {
         toast.error(err.meta.message);
       });
   };
-
-  useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
-  }, [provinces]);
 
   return (
     <>
@@ -148,24 +149,15 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Provinsi" name="province">
-                {/* <Select
-                  showSearch
-                  style={{ width: "100%" }}
-                  placeholder="Pilih Provinsi"
-                  onChange={handleChangeProvince}
-                  options={options}
-                /> */}
                 <SelectProvinces
                   setProvinces={setProvinces}
-                  // regencies={regencies}
+                  provinces={provinces}
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
-                <Input
-                  defaultValue={dataDaerah?.district}
-                  onChange={(e: any) =>
-                    setDataDaerah({ ...dataDaerah, district: e.target.value })
-                  }
+                <SelectDistricts
+                  setDistricts={setDistricts}
+                  districts={districts}
                 />
               </Form.Item>
               <Form.Item label="Latitude" name="latitude">
@@ -234,14 +226,6 @@ export const AddDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Kab / Kota" name="city">
-                {/* <Select
-                  showSearch
-                  style={{ width: "100%" }}
-                  placeholder="Pilih Kota / Kabupaten"
-                  value={dataDaerah?.city}
-                  onChange={handleChangeCity}
-                options={optionsCity}
-                /> */}
                 <SelectRegencies
                   setRegencies={setRegencies}
                   regencies={regencies}

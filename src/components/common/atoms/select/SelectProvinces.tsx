@@ -5,8 +5,12 @@ import { useGetProvinces } from "@hooks/api";
 
 interface Props {
   setProvinces: React.Dispatch<React.SetStateAction<any>>;
+  provinces: any;
 }
-export const SelectProvinces: React.FC<Props> = ({ setProvinces }) => {
+export const SelectProvinces: React.FC<Props> = ({
+  setProvinces,
+  provinces,
+}) => {
   const dataProvinces = useGetProvinces();
   const options: SelectProps["options"] = [];
   dataProvinces?.data?.map((item: any) => {
@@ -17,6 +21,7 @@ export const SelectProvinces: React.FC<Props> = ({ setProvinces }) => {
     setProvinces({ name: value, province_code: e.code });
   };
 
+  console.log("provinces", provinces);
   return (
     <Select
       showSearch

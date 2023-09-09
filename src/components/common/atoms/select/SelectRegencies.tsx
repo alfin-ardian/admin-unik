@@ -16,23 +16,23 @@ export const SelectRegencies: React.FC<Props> = ({
   dataRegencies?.data?.map((item: any) => {
     if (item.province_code === regencies.province_code) {
       options.push({
+        code: item.code,
         value: item.name,
         label: item.name,
-        code: item.code,
         province_code: item.province_code,
       });
     }
   });
 
   const handleChangeRegencies = (value: string, e: any) => {
-    setRegencies({ name: value });
+    setRegencies({ name: value, regency_code: e.code });
   };
 
   return (
     <Select
       showSearch
       style={{ width: "100%" }}
-      placeholder="Pilih Provinsi"
+      placeholder="Pilih Kota/Kabupaten"
       onChange={handleChangeRegencies}
       options={options}
     />
