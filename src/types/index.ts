@@ -7,3 +7,4 @@ export * from "./login";
 
 // Data Master
 export * from "./daerah";
+export * from "./desa";

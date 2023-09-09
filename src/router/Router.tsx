@@ -6,11 +6,11 @@ import {
   AddDaerah,
   DetailDaerah,
   Desa,
+  AddDesa,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
 import { Component } from "react";
 
-// const navigate = useNavigate();
 interface ErrorBoundaryState {
   hasError: boolean;
 }
@@ -63,6 +63,7 @@ export const router = createBrowserRouter([
       { path: "/daerah/tambah", element: <AddDaerah /> },
       { path: "/daerah/detail", element: <DetailDaerah /> },
       { path: "/desa", element: <Desa /> },
+      { path: "/desa/tambah", element: <AddDesa /> },
     ],
   },
 ]);

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { DaerahTable } from "@components/common/organisms";
+import { DesaTable } from "@components/common/organisms";
 import { BreadcrumbComp } from "@components/common/atoms";
 import { Link } from "react-router-dom";
 
-import { useGetDaerah } from "@hooks/api";
+import { useGetDesa } from "@hooks/api";
 
 export const Desa: React.FC = () => {
   const [filter] = useState({
@@ -11,7 +11,8 @@ export const Desa: React.FC = () => {
     page: 1,
     limit: 100,
   });
-  const { data: daerah } = useGetDaerah(filter);
+  const { data: desa } = useGetDesa(filter);
+  console.log(desa, "desa");
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
@@ -27,7 +28,7 @@ export const Desa: React.FC = () => {
         </Link>
       </div>
       <div className="p-4">
-        <DaerahTable daerah={daerah?.data} />
+        <DesaTable daerah={desa?.data} />
       </div>
     </div>
   );

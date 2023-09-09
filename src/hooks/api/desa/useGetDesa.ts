@@ -1,44 +1,34 @@
 import {
-  type DaerahResponse,
-  type DaerahFetchState,
-  type DaerahFetchAction,
+  type DesaResponse,
+  type DesaFetchState,
+  type DesaFetchAction,
 } from "types/index";
 import { useFetch } from "..";
 import { toast } from "react-hot-toast";
 import { getCurrentUser } from "@hooks/api";
 import { type LoginData } from "types/login";
 import { useEffect, useReducer } from "react";
-import { daerahFetchReducer } from "@reducers/daerah/Daerah";
+import { desaFetchReducer } from "@reducers/desa";
 
-interface DaerahParams {
-  filter: {
-    page: number;
-    orderBy: string;
-  };
-}
-
-export const useGetDaerah = (filter: any) => {
+export const useGetDesa = (filter: any) => {
   const [state, dispatch] = useReducer<
-    (state: DaerahFetchState, action: DaerahFetchAction) => DaerahFetchState
-  >(daerahFetchReducer, {
+    (state: DesaFetchState, action: DesaFetchAction) => DesaFetchState
+  >(desaFetchReducer, {
     data: null,
     error: null,
     loading: true,
   });
-  const getAllDaerah = useFetch("/daerah");
+  const getAllData = useFetch("/desa");
   let token: string;
   const user: LoginData = getCurrentUser();
   if (user != null) {
     token = user.access_token;
   }
 
-  const fetchData = async ({ filter }: DaerahParams) => {
+  const fetchData = async () => {
     try {
-      const response = await getAllDaerah(
-        token,
-        `?page=${filter.page}&orderBy=${filter.orderBy}`
-      );
-      const jsonData: DaerahResponse = await response.json();
+      const response = await getAllData(token);
+      const jsonData: DesaResponse = await response.json();
       if (jsonData.meta.status !== 200) {
         return await Promise.reject(jsonData);
       }
@@ -49,10 +39,10 @@ export const useGetDaerah = (filter: any) => {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_DAERAH_LIST", data: null });
+    dispatch({ type: "FETCH_DESA_LIST", data: null });
     toast
-      .promise<DaerahResponse>(
-        fetchData({ filter }),
+      .promise<DesaResponse>(
+        fetchData(),
         {
           error: "Loading error...",
           success: "Data loaded",
@@ -61,10 +51,10 @@ export const useGetDaerah = (filter: any) => {
         { className: "Inter text-xs" }
       )
       .then((data) => {
-        dispatch({ type: "FETCH_DAERAH_LIST_SUCCESS", data });
+        dispatch({ type: "FETCH_DESA_LIST_SUCCESS", data });
       })
       .catch((err) => {
-        dispatch({ type: "FETCH_DAERAH_LIST_ERROR", data: null });
+        dispatch({ type: "FETCH_DESA_LIST_ERROR", data: null });
         console.log(err);
       });
   }, [filter]);
