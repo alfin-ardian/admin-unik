@@ -34,6 +34,7 @@ export const SelectDaerah: React.FC<Props> = ({
     setDataDaerahState(dataDaerah?.data);
   }, [dataDaerah]);
 
+  console.log(daerah, "daerah");
   return (
     <Select
       showSearch
@@ -42,7 +43,7 @@ export const SelectDaerah: React.FC<Props> = ({
       onChange={handleChangeProvince}
       options={options}
       disabled={disabled}
-      defaultValue={daerah.name}
+      defaultValue={daerah?.name}
     />
   );
 };

@@ -26,7 +26,7 @@ export const DesaTable: React.FC<Props> = ({ daerah }) => {
   const navigate = useNavigate();
   const dataNew: DataType[] = daerah?.map((item: any) => ({
     id: item._id,
-    id_daerah: item.id_daerah,
+    daerah: item.daerah,
     name: item.name,
     description: item.description,
     leader: item.leader,
@@ -223,7 +223,7 @@ export const DesaTable: React.FC<Props> = ({ daerah }) => {
       key: "city",
       render: (value, record, index) => (
         <Space key={index}>
-          <Button onClick={() => navigate("/daerah/detail", { state: record })}>
+          <Button onClick={() => navigate("/desa/detail", { state: record })}>
             Detail
           </Button>
           <Button danger value={value} onClick={() => onDeleteData(record.id)}>

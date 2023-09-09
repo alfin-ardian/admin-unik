@@ -2,7 +2,7 @@ import { type Meta, type Pagination } from "..";
 
 export interface DesaData {
   id: string;
-  id_daerah: string;
+  daerah: Object;
   name: string;
   description: string;
   leader: string;
