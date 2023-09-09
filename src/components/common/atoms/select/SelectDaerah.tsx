@@ -23,11 +23,11 @@ export const SelectDaerah: React.FC<Props> = ({
 
   const options: SelectProps["options"] = [];
   dataDaerahState?.data?.map((item: any) => {
-    options.push({ value: item.name, label: item.name, code: item.code });
+    options.push({ value: item.name, label: item.name, _id: item._id });
   });
 
   const handleChangeProvince = (value: string, e: any) => {
-    setDaerah({ name: value, _id: e.code });
+    setDaerah({ name: value, _id: e._id });
   };
 
   useEffect(() => {
