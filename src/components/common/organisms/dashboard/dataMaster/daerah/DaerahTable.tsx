@@ -220,8 +220,8 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
     },
     {
       title: "Aksi",
-      dataIndex: "city",
-      key: "city",
+      dataIndex: "action",
+      key: "action",
       render: (value, record, index) => (
         <Space key={index}>
           <Button onClick={() => navigate("/daerah/detail", { state: record })}>
