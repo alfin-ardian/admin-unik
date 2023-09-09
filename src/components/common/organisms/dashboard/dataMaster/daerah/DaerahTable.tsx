@@ -207,9 +207,11 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
       dataIndex: "staff",
       key: "staff",
       ...getColumnSearchProps("staff"),
+      sorter: (a, b) => a.staff.length - b.staff.length,
+      sortDirections: ["descend", "ascend"],
     },
     {
-      title: "Whatsapp",
+      title: "Whatsapp Tim Pernikahan",
       dataIndex: "whatsapp_staff",
       key: "whatsapp_staff",
       ...getColumnSearchProps("whatsapp_staff"),
