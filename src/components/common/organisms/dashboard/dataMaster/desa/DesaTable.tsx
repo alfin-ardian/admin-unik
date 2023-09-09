@@ -1,5 +1,5 @@
 import type { InputRef } from "antd";
-import { useDelDaerah } from "@hooks/api";
+import { useDelDesa } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
@@ -64,9 +64,9 @@ export const DesaTable: React.FC<Props> = ({ daerah }) => {
   };
 
   const onDeleteData = (id: string) => {
-    useDelDaerah(id)
-      .then(() => {
-        toast.success("Data berhasil dihapus");
+    useDelDesa(id)
+      .then((res) => {
+        toast.success(res.meta.message);
         setTimeout(() => {
           navigate(0);
         }, 1000);
