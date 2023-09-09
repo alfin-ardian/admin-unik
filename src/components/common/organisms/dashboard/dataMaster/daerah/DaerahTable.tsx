@@ -63,7 +63,6 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
   };
 
   const onDeleteData = (id: string) => {
-    console.log(id, "ini id");
     useDelDaerah(id)
       .then(() => {
         toast.success("Data berhasil dihapus");

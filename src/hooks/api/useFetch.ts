@@ -1,8 +1,6 @@
 export const useFetch = (path: string, init?: RequestInit) => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  console.log(BASE_URL, "base url");
   const endpoint = `${BASE_URL}${path}`;
-  console.log(endpoint, "endpoint");
   const fetchData = async (
     bearer?: string,
     params?: string

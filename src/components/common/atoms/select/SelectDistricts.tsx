@@ -6,10 +6,12 @@ import { useGetDistricts } from "@hooks/api";
 interface Props {
   setDistricts: React.Dispatch<React.SetStateAction<any>>;
   districts: any;
+  disabled?: boolean;
 }
 export const SelectDistricts: React.FC<Props> = ({
   setDistricts,
   districts,
+  disabled,
 }) => {
   const dataDistritcs = useGetDistricts();
   const options: SelectProps["options"] = [];
@@ -35,6 +37,8 @@ export const SelectDistricts: React.FC<Props> = ({
       placeholder="Pilih Kecamatan"
       onChange={handleChangeDistricts}
       options={options}
+      disabled={disabled}
+      defaultValue={districts.name}
     />
   );
 };

@@ -6,10 +6,12 @@ import { useGetRegencies } from "@hooks/api";
 interface Props {
   setRegencies: React.Dispatch<React.SetStateAction<any>>;
   regencies: any;
+  disabled?: boolean;
 }
 export const SelectRegencies: React.FC<Props> = ({
   setRegencies,
   regencies,
+  disabled,
 }) => {
   const dataRegencies = useGetRegencies();
   const options: SelectProps["options"] = [];
@@ -35,6 +37,8 @@ export const SelectRegencies: React.FC<Props> = ({
       placeholder="Pilih Kota/Kabupaten"
       onChange={handleChangeRegencies}
       options={options}
+      disabled={disabled}
+      defaultValue={regencies.name}
     />
   );
 };

@@ -23,7 +23,6 @@ export const useDelDaerah = async (id: string) => {
   try {
     const response = await updateData(token);
     const jsonData = await response.json();
-    console.log(jsonData, "ini json data");
     if (jsonData.meta.status !== 200) {
       return await Promise.reject(jsonData);
     }

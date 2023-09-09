@@ -6,6 +6,11 @@ import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import {
+  SelectProvinces,
+  SelectRegencies,
+  SelectDistricts,
+} from "@components/common/atoms";
 
 interface Props {
   text: string;
@@ -32,14 +37,48 @@ export const DetailDaerah: React.FC = () => {
     lng: dataDaerah?.longitude,
   });
 
+  const [provinces, setProvinces] = useState<any>({
+    name: dataDaerah?.province,
+    province_code: "",
+  });
+  const [regencies, setRegencies] = useState<any>({
+    name: dataDaerah?.city,
+    province_code: "",
+  });
+  const [districts, setDistricts] = useState<any>({
+    name: dataDaerah?.district,
+    regency_code: "",
+  });
+
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      province: provinces?.name,
+    });
+    setRegencies({ ...regencies, province_code: provinces.province_code });
+  }, [provinces]);
+
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      city: regencies.name,
+    });
+    setDistricts({ ...districts, regency_code: regencies.regency_code });
+  }, [regencies]);
+
+  useEffect(() => {
+    setDataDaerah({
+      ...dataDaerah,
+      district: districts.name,
+    });
+  }, [districts]);
+
   useEffect(() => {
     setCenter({
       lat: dataDaerah?.latitude,
       lng: dataDaerah?.longitude,
     });
   }, [dataDaerah]);
-
-  console.log(dataDaerah, "dataDaerah");
 
   const onUpdate = () => {
     usePutDaerah(dataDaerah)
@@ -141,21 +180,17 @@ export const DetailDaerah: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="Provinsi" name="province">
-                <Input
-                  defaultValue={dataDaerah?.province}
+                <SelectProvinces
+                  setProvinces={setProvinces}
                   disabled={!isEdit}
-                  onChange={(e) =>
-                    setDataDaerah({ ...dataDaerah, province: e.target.value })
-                  }
+                  provinces={provinces}
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
-                <Input
-                  defaultValue={dataDaerah?.district}
+                <SelectDistricts
+                  setDistricts={setDistricts}
                   disabled={!isEdit}
-                  onChange={(e) =>
-                    setDataDaerah({ ...dataDaerah, district: e.target.value })
-                  }
+                  districts={districts}
                 />
               </Form.Item>
               <Form.Item label="Latitude" name="latitude">
@@ -229,13 +264,11 @@ export const DetailDaerah: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Kab / Kota" name="city">
-                <Input
-                  defaultValue={dataDaerah?.city}
+              <Form.Item label="Kota / Kabupaten" name="city">
+                <SelectRegencies
+                  setRegencies={setRegencies}
                   disabled={!isEdit}
-                  onChange={(e) =>
-                    setDataDaerah({ ...dataDaerah, city: e.target.value })
-                  }
+                  regencies={regencies}
                 />
               </Form.Item>
               <Form.Item label="Alamat" name="address">
