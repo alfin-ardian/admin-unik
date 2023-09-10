@@ -203,7 +203,7 @@ export const AddKelompok: React.FC = () => {
                 name="desa"
                 rules={[{ required: true }]}
               >
-                <SelectDesa setDesa={setDesa} desa={desa} />
+                <SelectDesa daerah={daerah} setDesa={setDesa} desa={desa} />
               </Form.Item>
               <Form.Item label="Keterangan" name="description">
                 <Input

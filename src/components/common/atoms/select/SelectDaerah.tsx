@@ -34,7 +34,6 @@ export const SelectDaerah: React.FC<Props> = ({
     setDataDaerahState(dataDaerah?.data);
   }, [dataDaerah]);
 
-  console.log(daerah, "daerah");
   return (
     <Select
       showSearch

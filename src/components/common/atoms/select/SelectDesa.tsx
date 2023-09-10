@@ -4,11 +4,17 @@ import type { SelectProps } from "antd";
 import { useGetDesa } from "@hooks/api";
 
 interface Props {
+  daerah: any;
   setDesa: React.Dispatch<React.SetStateAction<any>>;
   desa: any;
   disabled?: boolean;
 }
-export const SelectDesa: React.FC<Props> = ({ setDesa, desa, disabled }) => {
+export const SelectDesa: React.FC<Props> = ({
+  daerah,
+  setDesa,
+  desa,
+  disabled,
+}) => {
   const [filter] = useState({
     orderBy: "ASC",
     page: 1,
@@ -19,7 +25,9 @@ export const SelectDesa: React.FC<Props> = ({ setDesa, desa, disabled }) => {
 
   const options: SelectProps["options"] = [];
   dataDesaState?.data?.map((item: any) => {
-    options.push({ value: item.name, label: item.name, _id: item._id });
+    if (item.daerah._id === daerah._id) {
+      options.push({ value: item.name, label: item.name, _id: item._id });
+    }
   });
 
   const handleChangeDesa = (value: string, e: any) => {
