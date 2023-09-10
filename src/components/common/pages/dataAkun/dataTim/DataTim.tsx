@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetKelompok } from "@hooks/api";
+import { useGetTim } from "@hooks/api";
 import { TimTable } from "@components/common/organisms";
 import { BreadcrumbComp } from "@components/common/atoms";
 
@@ -10,7 +10,7 @@ export const DataTim: React.FC = () => {
     page: 1,
     limit: 100,
   });
-  const { data: kelompok } = useGetKelompok(filter);
+  const { data: kelompok } = useGetTim(filter);
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
