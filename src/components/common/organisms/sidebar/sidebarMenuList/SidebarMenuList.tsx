@@ -50,8 +50,8 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         icon={<UserIcon />}
       />
       <SidebarMenuListing
-        to={"/"}
-        label="Data Tim"
+        to={"/data/tim-pernikahan"}
+        label="Data Tim Pernikahan"
         active={isRoot}
         collapse={collapse}
         icon={<StaffIcon />}
