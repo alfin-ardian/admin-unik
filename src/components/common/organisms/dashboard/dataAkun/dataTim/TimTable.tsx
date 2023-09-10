@@ -1,5 +1,5 @@
 import type { InputRef } from "antd";
-import { useDelDesa } from "@hooks/api";
+import { useDelTim } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
@@ -59,7 +59,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
   };
 
   const onDeleteData = (id: string) => {
-    useDelDesa(id)
+    useDelTim(id)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {
