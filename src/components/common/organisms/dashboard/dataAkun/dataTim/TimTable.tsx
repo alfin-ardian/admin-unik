@@ -3,8 +3,8 @@ import { useDelTim } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
-import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table } from "antd";
+import { CheckCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button, Input, Space, Table, Tag } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import toast, { Toaster } from "react-hot-toast";
@@ -221,6 +221,36 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
       title: "Kelompok",
       dataIndex: "kelompok",
       key: "kelompok",
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <span>{value?.name}</span>
+        </Space>
+      ),
+    },
+    {
+      title: "Approve",
+      dataIndex: "is_approved",
+      key: "is_approved",
+      render: (value, record, index) => (
+        <Tag
+          icon={
+            <CheckCircleOutlined
+              key={index}
+              accessKey={value}
+              itemID={record.id}
+            />
+          }
+          color="success"
+        >
+          Iya
+        </Tag>
+      ),
+    },
+    {
+      title: "Last Login",
+      dataIndex: "last_login",
+      key: "last_login",
+      width: "10%",
       render: (value, record, index) => (
         <Space key={index} accessKey={value} itemID={record.id}>
           <span>{value?.name}</span>
