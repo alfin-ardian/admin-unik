@@ -11,8 +11,8 @@ export interface TimData {
   email: string;
   password: string;
   description: string;
-  attachment: string;
-  is_approve: boolean;
+  attachments: string;
+  is_approved: boolean;
   created_at: Date;
   updated_at: Date;
 }

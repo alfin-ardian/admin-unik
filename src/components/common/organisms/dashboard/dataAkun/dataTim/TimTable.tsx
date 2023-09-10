@@ -12,10 +12,10 @@ import toast, { Toaster } from "react-hot-toast";
 interface DataType {
   id: string;
   name: string;
-  city: string;
-  leader: string;
-  staff: string;
-  whatsapp_staff: string;
+  whatsapp: string;
+  daerah: Object;
+  desa: Object;
+  kelompok: Object;
 }
 
 type DataIndex = keyof DataType;
@@ -28,22 +28,16 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
     id: item._id,
     daerah: item.daerah,
     desa: item.desa,
+    kelompok: item.kelompok,
     name: item.name,
+    title: item.title,
+    username: item.username,
+    whatsapp: item.whatsapp,
+    email: item.email,
+    is_approved: item.is_approved,
     description: item.description,
-    leader: item.leader,
-    whatsapp_leader: item.whatsapp_leader,
-    vice_leader: item.vice_leader,
-    whatsapp_vice_leader: item.whatsapp_vice_leader,
-    staff: item.staff,
-    whatsapp_staff: item.whatsapp_staff,
-    vice_staff: item.vice_staff,
-    whatsapp_vice_staff: item.whatsapp_vice_staff,
-    province: item.province,
-    city: item.city,
-    district: item.district,
-    address: item.address,
-    latitude: item.latitude,
-    longitude: item.longitude,
+    attachments: item.attachments,
+    last_login: item.last_login,
   }));
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -190,41 +184,60 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
     },
     {
       title: "Whatsapp",
-      dataIndex: "city",
-      key: "city",
-      ...getColumnSearchProps("city"),
-      sorter: (a, b) => a.city.length - b.city.length,
+      dataIndex: "whatsapp",
+      key: "whatsapp",
+      ...getColumnSearchProps("whatsapp"),
+      sorter: (a, b) => a.whatsapp.length - b.whatsapp.length,
       sortDirections: ["descend", "ascend"],
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <a href={`https://wa.me/${value}`} target="_blank">
+            {value}
+          </a>
+        </Space>
+      ),
     },
     {
       title: "Daerah",
-      dataIndex: "leader",
-      key: "leader",
-      ...getColumnSearchProps("leader"),
-      sorter: (a, b) => a.leader.length - b.leader.length,
-      sortDirections: ["descend", "ascend"],
+      dataIndex: "daerah",
+      key: "daerah",
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <span>{value.name}</span>
+        </Space>
+      ),
     },
     {
       title: "Desa",
-      dataIndex: "staff",
-      key: "staff",
-      ...getColumnSearchProps("staff"),
+      dataIndex: "desa",
+      key: "desa",
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <span>{value.name}</span>
+        </Space>
+      ),
     },
     {
       title: "Kelompok",
-      dataIndex: "whatsapp_staff",
-      key: "whatsapp_staff",
-      ...getColumnSearchProps("whatsapp_staff"),
-      sorter: (a, b) => a.whatsapp_staff.length - b.whatsapp_staff.length,
-      sortDirections: ["descend", "ascend"],
+      dataIndex: "kelompok",
+      key: "kelompok",
+      render: (value, record, index) => (
+        <Space key={index} accessKey={value} itemID={record.id}>
+          <span>{value.name}</span>
+        </Space>
+      ),
     },
     {
       title: "Aksi",
-      dataIndex: "city",
-      key: "city",
+      dataIndex: "action",
+      key: "action",
       render: (value, record, index) => (
         <Space key={index}>
-          <Button onClick={() => navigate("/desa/detail", { state: record })}>
+          <Button
+            onClick={() =>
+              navigate("/data/tim-pernikahan/detail", { state: record })
+            }
+          >
             Detail
           </Button>
           <Button danger value={value} onClick={() => onDeleteData(record.id)}>

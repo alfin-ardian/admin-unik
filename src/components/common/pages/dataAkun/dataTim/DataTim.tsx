@@ -19,7 +19,7 @@ export const DataTim: React.FC = () => {
       </div>
       <div className="flex justify-end mb-2 mr-2">
         <Link
-          to={"/kelompok/tambah"}
+          to={"/data/tim-pernikahan/tambah"}
           className="flex items-center gap-1 text-white bg-sky-600 hover:bg-sky-700 font-medium border border-sky-600 px-4 py-2 rounded-lg"
         >
           + Tambah
