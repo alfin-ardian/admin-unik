@@ -11,6 +11,7 @@ import {
   SelectRegencies,
   SelectDistricts,
   SelectDaerah,
+  SelectDesa,
 } from "@components/common/atoms";
 
 interface Props {
@@ -39,41 +40,43 @@ export const AddKelompok: React.FC = () => {
   const [provinces, setProvinces] = useState<any>({});
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
-  const [dataDesa, setDataDesa] = useState<any>({});
+  const [dataKelompok, setDataKelompok] = useState<any>({});
   const [daerah, setDaerah] = useState<any>({});
+  const [desa, setDesa] = useState<any>({});
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
+    setDataKelompok({
+      ...dataKelompok,
       provinces: provinces.name,
     });
     setRegencies({ ...regencies, province_code: provinces.province_code });
   }, [provinces]);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
+    setDataKelompok({
+      ...dataKelompok,
       city: regencies.name,
     });
     setDistricts({ ...districts, regency_code: regencies.regency_code });
   }, [regencies]);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
+    setDataKelompok({
+      ...dataKelompok,
       districts: districts.name,
     });
   }, [districts]);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
+    setDataKelompok({
+      ...dataKelompok,
       daerah: daerah,
+      desa: desa,
     });
-  }, [dataDesa]);
+  }, [dataKelompok]);
 
   const onUpdate = () => {
-    usePostKelompok(dataDesa)
+    usePostKelompok(dataKelompok)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {
@@ -108,10 +111,25 @@ export const AddKelompok: React.FC = () => {
             <div className="w-1/2 pr-4">
               <Form.Item
                 label="Pilih Daerah"
-                name="name"
+                name="daerah"
                 rules={[{ required: true }]}
               >
                 <SelectDaerah setDaerah={setDaerah} daerah={daerah} />
+              </Form.Item>
+              <Form.Item
+                label="Nama Kelompok"
+                name="name"
+                rules={[{ required: true }]}
+              >
+                <Input
+                  defaultValue={dataKelompok?.name}
+                  onChange={(e: any) =>
+                    setDataKelompok({
+                      ...dataKelompok,
+                      name: e.target.value,
+                    })
+                  }
+                />
               </Form.Item>
               <Form.Item
                 label="Keimaman"
@@ -119,18 +137,18 @@ export const AddKelompok: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  defaultValue={dataDesa?.leader}
+                  defaultValue={dataKelompok?.leader}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, leader: e.target.value })
+                    setDataKelompok({ ...dataKelompok, leader: e.target.value })
                   }
                 />
               </Form.Item>
               <Form.Item label="Wakil Keimaman" name="vice_leader">
                 <Input
-                  defaultValue={dataDesa?.vice_leader}
+                  defaultValue={dataKelompok?.vice_leader}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       vice_leader: e.target.value,
                     })
                   }
@@ -138,17 +156,20 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Tim Pernikahan" name="staff">
                 <Input
-                  defaultValue={dataDesa?.staff}
+                  defaultValue={dataKelompok?.staff}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, staff: e.target.value })
+                    setDataKelompok({ ...dataKelompok, staff: e.target.value })
                   }
                 />
               </Form.Item>
               <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
                 <Input
-                  defaultValue={dataDesa?.vice_staff}
+                  defaultValue={dataKelompok?.vice_staff}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, vice_staff: e.target.value })
+                    setDataKelompok({
+                      ...dataKelompok,
+                      vice_staff: e.target.value,
+                    })
                   }
                 />
               </Form.Item>
@@ -166,42 +187,41 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Latitude" name="latitude">
                 <Input
-                  defaultValue={dataDesa?.latitude}
+                  defaultValue={dataKelompok?.latitude}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, latitude: e.target.value })
+                    setDataKelompok({
+                      ...dataKelompok,
+                      latitude: e.target.value,
+                    })
                   }
                 />
               </Form.Item>
             </div>
             <div className="w-1/2 pl-4">
-              {/* <Form.Item
-                label="Nama Desa"
-                name="name"
+              <Form.Item
+                label="Pilih Desa"
+                name="desa"
                 rules={[{ required: true }]}
               >
+                <SelectDesa setDesa={setDesa} desa={desa} />
+              </Form.Item>
+              <Form.Item label="Keterangan" name="description">
                 <Input
-                  defaultValue={dataDesa?.name}
+                  defaultValue={dataKelompok?.name}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       name: e.target.value,
                     })
                   }
                 />
-              </Form.Item> */}
-              <Form.Item
-                label="Pilih Desa"
-                name="name"
-                rules={[{ required: true }]}
-              >
-                <SelectDaerah setDaerah={setDaerah} daerah={daerah} />
               </Form.Item>
               <Form.Item label="Whatsapp KI" name="whatsapp_leader">
                 <Input
-                  defaultValue={dataDesa?.whatsapp_leader}
+                  defaultValue={dataKelompok?.whatsapp_leader}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       whatsapp_leader: e.target.value,
                     })
                   }
@@ -209,10 +229,10 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Wakil" name="whatsapp_vice_leader">
                 <Input
-                  defaultValue={dataDesa?.whatsapp_vice_leader}
+                  defaultValue={dataKelompok?.whatsapp_vice_leader}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       whatsapp_vice_leader: e.target.value,
                     })
                   }
@@ -220,10 +240,10 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
-                  defaultValue={dataDesa?.whatsapp_staff}
+                  defaultValue={dataKelompok?.whatsapp_staff}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       whatsapp_staff: e.target.value,
                     })
                   }
@@ -231,10 +251,10 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Whatsapp Wakil Tim" name="whatsapp_vice_staff">
                 <Input
-                  defaultValue={dataDesa?.whatsapp_vice_staff}
+                  defaultValue={dataKelompok?.whatsapp_vice_staff}
                   onChange={(e: any) =>
-                    setDataDesa({
-                      ...dataDesa,
+                    setDataKelompok({
+                      ...dataKelompok,
                       whatsapp_vice_staff: e.target.value,
                     })
                   }
@@ -248,17 +268,23 @@ export const AddKelompok: React.FC = () => {
               </Form.Item>
               <Form.Item label="Alamat" name="address">
                 <Input
-                  defaultValue={dataDesa?.address}
+                  defaultValue={dataKelompok?.address}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, address: e.target.value })
+                    setDataKelompok({
+                      ...dataKelompok,
+                      address: e.target.value,
+                    })
                   }
                 />
               </Form.Item>
               <Form.Item label="Logitude" name="longitude">
                 <Input
-                  defaultValue={dataDesa?.longitude}
+                  defaultValue={dataKelompok?.longitude}
                   onChange={(e: any) =>
-                    setDataDesa({ ...dataDesa, longitude: e.target.value })
+                    setDataKelompok({
+                      ...dataKelompok,
+                      longitude: e.target.value,
+                    })
                   }
                 />
               </Form.Item>
