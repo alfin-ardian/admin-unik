@@ -242,7 +242,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
           }
           color="success"
         >
-          Iya
+          Sudah
         </Tag>
       ),
     },

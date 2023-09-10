@@ -5,9 +5,14 @@ import { SidebarMenuList } from "..";
 interface Props {
   onClick: () => void;
   collapse?: boolean;
+  setBreadcrumb: React.Dispatch<React.SetStateAction<any>>;
 }
 
-export const Sidebar: React.FC<Props> = ({ onClick, collapse }) => {
+export const Sidebar: React.FC<Props> = ({
+  setBreadcrumb,
+  onClick,
+  collapse,
+}) => {
   return (
     <aside className="sidebar fixed overflow-y-auto bottom-0 left-0 top-0 bg-white">
       <div className="inner px-4 pt-4 pb-8 text-center">
@@ -16,7 +21,7 @@ export const Sidebar: React.FC<Props> = ({ onClick, collapse }) => {
           Jodoh
         </div>
         <div className="mt-16">
-          <SidebarMenuList collapse={collapse} />
+          <SidebarMenuList collapse={collapse} setBreadcrumb={setBreadcrumb} />
         </div>
       </div>
     </aside>

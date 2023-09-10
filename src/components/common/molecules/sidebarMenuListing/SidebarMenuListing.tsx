@@ -1,6 +1,7 @@
 // import { ChevronDownIcon } from "@components/common/atoms";
 import React from "react";
-import { Link, type To } from "react-router-dom";
+import { Link, type To, useLocation } from "react-router-dom";
+import { capitalizeEachWord } from "@utils/capitalizeEachWord";
 
 interface Props {
   icon?: React.ReactElement;
@@ -11,6 +12,7 @@ interface Props {
   onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   to?: To;
   collapse?: boolean;
+  setBreadcrumb: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const SidebarMenuListing: React.FC<Props> = ({
@@ -20,9 +22,13 @@ export const SidebarMenuListing: React.FC<Props> = ({
   hasSubMenu = false,
   isOpen = false,
   onClick,
+  setBreadcrumb,
   to = "#",
   collapse,
 }) => {
+  const location = useLocation();
+  console.log(location, "location");
+  setBreadcrumb(capitalizeEachWord(location.pathname));
   return (
     <Link
       to={to}

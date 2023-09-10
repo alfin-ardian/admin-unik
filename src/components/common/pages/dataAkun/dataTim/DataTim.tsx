@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetTim } from "@hooks/api";
 import { TimTable } from "@components/common/organisms";
-import { BreadcrumbComp } from "@components/common/atoms";
 
 export const DataTim: React.FC = () => {
   const [filter] = useState({
@@ -14,9 +13,6 @@ export const DataTim: React.FC = () => {
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
-      <div className="flex justify-start ml-2">
-        <BreadcrumbComp page="Data Akun" subPage="Data Tim Pernikahan" />
-      </div>
       <div className="flex justify-end mb-2 mr-2">
         <Link
           to={"/data/tim-pernikahan/tambah"}

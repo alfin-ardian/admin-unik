@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DaerahTable } from "@components/common/organisms";
-import { BreadcrumbComp } from "@components/common/atoms";
 import { Link } from "react-router-dom";
 
 import { useGetDaerah } from "@hooks/api";
@@ -15,9 +14,6 @@ export const Daerah: React.FC = () => {
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
-      <div className="flex justify-start ml-2">
-        <BreadcrumbComp page="Data Master" subPage="Data Daerah" />
-      </div>
       <div className="flex justify-end mb-2 mr-2">
         <Link
           to={"/daerah/tambah"}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetKelompok } from "@hooks/api";
 import { KelompokTable } from "@components/common/organisms";
-import { BreadcrumbComp } from "@components/common/atoms";
 
 export const Kelompok: React.FC = () => {
   const [filter] = useState({
@@ -14,9 +13,6 @@ export const Kelompok: React.FC = () => {
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
-      <div className="flex justify-start ml-2">
-        <BreadcrumbComp page="Data Master" subPage="Data Kelompok" />
-      </div>
       <div className="flex justify-end mb-2 mr-2">
         <Link
           to={"/kelompok/tambah"}
