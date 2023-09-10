@@ -9,6 +9,7 @@ import {
   AddDesa,
   DetailDesa,
   Kelompok,
+  AddKelompok,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
 import { Component } from "react";
@@ -68,6 +69,7 @@ export const router = createBrowserRouter([
       { path: "/desa/tambah", element: <AddDesa /> },
       { path: "/desa/detail", element: <DetailDesa /> },
       { path: "/kelompok", element: <Kelompok /> },
+      { path: "/kelompok/tambah", element: <AddKelompok /> },
     ],
   },
 ]);
