@@ -72,7 +72,7 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         icon={<DesaIcon />}
       />
       <SidebarMenuListing
-        to={"/"}
+        to={"/kelompok"}
         label="Data Kelompok"
         active={isRoot}
         collapse={collapse}
