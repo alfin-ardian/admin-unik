@@ -203,7 +203,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
       key: "daerah",
       render: (value, record, index) => (
         <Space key={index} accessKey={value} itemID={record.id}>
-          <span>{value.name}</span>
+          <span>{value?.name}</span>
         </Space>
       ),
     },
@@ -213,7 +213,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
       key: "desa",
       render: (value, record, index) => (
         <Space key={index} accessKey={value} itemID={record.id}>
-          <span>{value.name}</span>
+          <span>{value?.name}</span>
         </Space>
       ),
     },
@@ -223,7 +223,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
       key: "kelompok",
       render: (value, record, index) => (
         <Space key={index} accessKey={value} itemID={record.id}>
-          <span>{value.name}</span>
+          <span>{value?.name}</span>
         </Space>
       ),
     },

@@ -25,7 +25,7 @@ export const AddDataTim: React.FC = () => {
       desa: desa,
       kelompok: kelompok,
     });
-  }, []);
+  }, [daerah, desa, kelompok]);
 
   const onSubmit = () => {
     usePostTim(dataKelompok)
