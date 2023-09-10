@@ -8,6 +8,8 @@ import {
   DaerahIcon,
   DesaIcon,
   KelompokIcon,
+  BadgeIcon,
+  PesananIcon,
   AdsenseIcon,
 } from "@components/common/atoms";
 
@@ -79,6 +81,20 @@ export const SidebarMenuList: React.FC<Props> = ({ collapse }) => {
         icon={<KelompokIcon />}
       />
       <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
+      <SidebarMenuListing
+        to={"/"}
+        label="Badge"
+        active={isRoot}
+        collapse={collapse}
+        icon={<BadgeIcon />}
+      />
+      <SidebarMenuListing
+        to={"/"}
+        label="Pesanan"
+        active={isRoot}
+        collapse={collapse}
+        icon={<PesananIcon />}
+      />
       <SidebarMenuListing
         to={"/"}
         label="Posting Iklan"
