@@ -27,7 +27,6 @@ export const SidebarMenuListing: React.FC<Props> = ({
   collapse,
 }) => {
   const location = useLocation();
-  console.log(location, "location");
   setBreadcrumb(capitalizeEachWord(location.pathname));
   return (
     <Link

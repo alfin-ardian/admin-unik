@@ -46,8 +46,8 @@ export const SidebarMenuList: React.FC<Props> = ({
       />
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
-        to={"/"}
-        label="Calon Tim "
+        to={"/calon/tim-pernikahan"}
+        label="Calon Tim"
         active={isRoot}
         collapse={collapse}
         icon={<StaffIcon />}
@@ -63,7 +63,7 @@ export const SidebarMenuList: React.FC<Props> = ({
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
         to={"/data/tim-pernikahan"}
-        label="Data Tim Pernikahan"
+        label="Data Tim"
         active={isRoot}
         collapse={collapse}
         icon={<StaffIcon />}

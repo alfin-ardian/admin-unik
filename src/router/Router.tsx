@@ -2,6 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import {
   Login,
   Dashboard,
+  CalonTim,
+  DataTim,
+  AddDataTim,
   Daerah,
   AddDaerah,
   DetailDaerah,
@@ -10,8 +13,6 @@ import {
   DetailDesa,
   Kelompok,
   AddKelompok,
-  DataTim,
-  AddDataTim,
 } from "@components/common/pages";
 import { RootView } from "./RootView";
 import { Component } from "react";
@@ -64,6 +65,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       { path: "/", element: <Dashboard /> },
+      { path: "/calon/tim-pernikahan", element: <CalonTim /> },
       { path: "/daerah", element: <Daerah /> },
       { path: "/daerah/tambah", element: <AddDaerah /> },
       { path: "/daerah/detail", element: <DetailDaerah /> },

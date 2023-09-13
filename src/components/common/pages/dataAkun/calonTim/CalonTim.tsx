@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import { useGetTim } from "@hooks/api";
 import { TimTable } from "@components/common/organisms";
 
-export const DataTim: React.FC = () => {
+export const CalonTim: React.FC = () => {
   const [filter] = useState({
-    is_approved: true,
+    is_approved: false,
   });
-  const { data: kelompok } = useGetTim(filter);
+  const { data: pengurus } = useGetTim(filter);
 
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
       <div className="flex justify-end mb-2 mr-2">
         <Link
-          to={"/data/tim-pernikahan/tambah"}
+          to={"/calon/tim-pernikahan/tambah"}
           className="flex items-center gap-1 text-white bg-sky-600 hover:bg-sky-700 font-medium border border-sky-600 px-4 py-2 rounded-lg"
         >
           + Tambah
         </Link>
       </div>
       <div className="p-4">
-        <TimTable kelompok={kelompok?.data} />
+        <TimTable kelompok={pengurus?.data} />
       </div>
     </div>
   );

@@ -10,6 +10,14 @@ import { type LoginData } from "types/login";
 import { useEffect, useReducer } from "react";
 import { timFetchReducer } from "@reducers/tim";
 
+interface TimParams {
+  filter: {
+    page: number;
+    sorting: string;
+    is_approved: boolean;
+  };
+}
+
 export const useGetTim = (filter: any) => {
   const [state, dispatch] = useReducer<
     (state: TimFetchState, action: TimFetchAction) => TimFetchState
@@ -25,9 +33,12 @@ export const useGetTim = (filter: any) => {
     token = user.access_token;
   }
 
-  const fetchData = async () => {
+  const fetchData = async ({ filter }: TimParams) => {
     try {
-      const response = await getAllData(token);
+      const response = await getAllData(
+        token,
+        `?is_approved=${filter.is_approved}`
+      );
       const jsonData: TimResponse = await response.json();
       if (jsonData.meta.status !== 200) {
         return await Promise.reject(jsonData);
@@ -42,7 +53,7 @@ export const useGetTim = (filter: any) => {
     dispatch({ type: "FETCH_TIM_LIST", data: null });
     toast
       .promise<TimResponse>(
-        fetchData(),
+        fetchData({ filter }),
         {
           error: "Loading error...",
           success: "Data loaded",
