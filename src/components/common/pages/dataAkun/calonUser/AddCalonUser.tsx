@@ -23,24 +23,27 @@ export const AddCalonUser: React.FC = () => {
   const [kelompok, setKelompok] = useState<any>({});
 
   useEffect(() => {
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
+  }, [provinces]);
+
+  useEffect(() => {
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
+  }, [regencies]);
+
+  useEffect(() => {
     setDataCalonUser({
-      ...dataCalonUser,
+      daerah: daerah,
+      desa: desa,
+      kelompok: kelompok,
       provinces: provinces.name,
       city: regencies.name,
       districts: districts.name,
     });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
-  }, [provinces, regencies, districts]);
-
-  useEffect(() => {
-    setDataCalonUser({
-      ...dataCalonUser,
-      daerah: daerah,
-      desa: desa,
-      kelompok: kelompok,
-    });
-  }, [dataCalonUser]);
+  }, [daerah, desa, kelompok, provinces, regencies, districts]);
 
   const onUpdate = () => {
     usePostKelompok(dataCalonUser)
