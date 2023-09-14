@@ -3,13 +3,18 @@ import { useDelTim } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
-import { CheckCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  SearchOutlined,
+  WarningOutlined,
+} from "@ant-design/icons";
 import { Button, Input, Space, Table, Tag } from "antd";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
 import toast, { Toaster } from "react-hot-toast";
 
 interface DataType {
+  is_approved: any;
   id: string;
   name: string;
   whatsapp: string;
@@ -234,15 +239,23 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
       render: (value, record, index) => (
         <Tag
           icon={
-            <CheckCircleOutlined
-              key={index}
-              accessKey={value}
-              itemID={record.id}
-            />
+            record.is_approved ? (
+              <CheckCircleOutlined
+                key={index}
+                accessKey={value}
+                itemID={record.id}
+              />
+            ) : (
+              <WarningOutlined
+                key={index}
+                accessKey={value}
+                itemID={record.id}
+              />
+            )
           }
-          color="success"
+          color={record.is_approved ? "success" : "warning"}
         >
-          Sudah
+          {record?.is_approved ? "Sudah" : "Belum"}
         </Tag>
       ),
     },
