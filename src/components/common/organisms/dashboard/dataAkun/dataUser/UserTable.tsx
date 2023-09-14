@@ -1,6 +1,6 @@
 import type { InputRef } from "antd";
 import { useDelTim } from "@hooks/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
 import {
@@ -29,6 +29,7 @@ interface Props {
 }
 
 export const UserTable: React.FC<Props> = ({ kelompok }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dataNew: DataType[] = kelompok?.map((item: any) => ({
     id: item._id,
@@ -293,7 +294,9 @@ export const UserTable: React.FC<Props> = ({ kelompok }) => {
       render: (value, record, index) => (
         <Space key={index}>
           <Button
-            onClick={() => navigate("/calon/user/detail", { state: record })}
+            onClick={() =>
+              navigate(location.pathname + "/detail", { state: record })
+            }
           >
             Detail
           </Button>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useGetUser } from "@hooks/api";
-import { TimTable } from "@components/common/organisms";
+import { UserTable } from "@components/common/organisms";
 
 export const DataUser: React.FC = () => {
   const [filter] = useState({
@@ -20,7 +20,7 @@ export const DataUser: React.FC = () => {
         </Link>
       </div>
       <div className="p-4">
-        <TimTable kelompok={user?.data} />
+        <UserTable kelompok={user?.data} />
       </div>
     </div>
   );
