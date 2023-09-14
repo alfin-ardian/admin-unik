@@ -39,42 +39,44 @@ export const DetailKelompok: React.FC = () => {
     lng: 111.11001,
   });
 
-  const [provinces, setProvinces] = useState<any>({});
-  const [regencies, setRegencies] = useState<any>({ province_code: "" });
-  const [districts, setDistricts] = useState<any>({ regency_code: "" });
+  const [provinces, setProvinces] = useState<any>({
+    name: detailKelompok?.province,
+    province_code: "",
+  });
+  const [regencies, setRegencies] = useState<any>({
+    name: detailKelompok?.city,
+    province_code: "",
+  });
+  const [districts, setDistricts] = useState<any>({
+    name: detailKelompok?.district,
+    regency_code: "",
+  });
   const [dataKelompok, setDataKelompok] = useState<any>(detailKelompok);
   const [daerah, setDaerah] = useState<any>(detailKelompok?.daerah);
   const [desa, setDesa] = useState<any>(detailKelompok?.desa);
 
   useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
-      city: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
 
   useEffect(() => {
     setDataKelompok({
       ...dataKelompok,
-      districts: districts.name,
-    });
-  }, [districts]);
-
-  useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
       daerah: daerah,
+      desa: desa,
+      province: provinces.name,
+      city: regencies.name,
+      district: districts.name,
     });
-  }, [daerah]);
+  }, [daerah, desa, provinces, regencies, districts]);
 
   const onUpdate = () => {
     usePutKelompok(dataKelompok)
