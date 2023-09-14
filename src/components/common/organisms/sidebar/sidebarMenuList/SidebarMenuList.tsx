@@ -54,7 +54,7 @@ export const SidebarMenuList: React.FC<Props> = ({
       />
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
-        to={"/"}
+        to={"/data/user"}
         label="Data User"
         active={isRoot}
         collapse={collapse}

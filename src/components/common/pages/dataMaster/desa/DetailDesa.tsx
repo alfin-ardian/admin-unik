@@ -42,7 +42,6 @@ export const DetailDesa: React.FC = () => {
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
   const [dataDesa, setDataDesa] = useState<any>(desaDetail);
-  console.log(desaDetail, "desaDetail");
   const [daerah, setDaerah] = useState<any>(desaDetail?.daerah);
 
   useEffect(() => {
