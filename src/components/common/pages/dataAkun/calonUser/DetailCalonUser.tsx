@@ -251,28 +251,36 @@ export const DetailCalonUser: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Mubalight/ghot?" name="is_mt">
-                <Input
+              <Form.Item label="Mubalight?" name="is_mt">
+                <Select
                   placeholder="Apakah anda seorang mubalight / mubalighot"
-                  defaultValue={dataCalonUser?.is_mt}
+                  defaultValue={dataCalonUser?.is_mt ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      is_mt: e.target.value,
+                      is_mt: e,
                     })
                   }
+                  options={[
+                    { value: "true", label: "Iya" },
+                    { value: "false", label: "Tidak" },
+                  ]}
                 />
               </Form.Item>
               <Form.Item label="Sarjana?" name="is_sarjana">
-                <Input
+                <Select
                   placeholder="Apakah anda seorang sarjana"
-                  defaultValue={dataCalonUser?.is_sarjana}
+                  defaultValue={dataCalonUser?.is_sarjana ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      is_sarjana: e.target.value,
+                      is_sarjana: e,
                     })
                   }
+                  options={[
+                    { value: "true", label: "Iya" },
+                    { value: "false", label: "Tidak" },
+                  ]}
                 />
               </Form.Item>
             </div>
@@ -302,7 +310,7 @@ export const DetailCalonUser: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <Select
-                  defaultValue="Pilih approve"
+                  defaultValue={dataCalonUser?.is_approved ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
@@ -310,8 +318,8 @@ export const DetailCalonUser: React.FC = () => {
                     })
                   }
                   options={[
-                    { value: "true", label: "Yes" },
-                    { value: "false", label: "No" },
+                    { value: "true", label: "Iya" },
+                    { value: "false", label: "Tidak" },
                   ]}
                 />
               </Form.Item>
@@ -455,15 +463,19 @@ export const DetailCalonUser: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item label="HB?" name="is_hb">
-                <Input
+                <Select
                   placeholder="Apakah anda khatam hadist besar"
-                  defaultValue={dataCalonUser?.is_hb}
+                  defaultValue={dataCalonUser?.is_hb ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      is_hb: e.target.value,
+                      is_hb: e,
                     })
                   }
+                  options={[
+                    { value: "true", label: "Iya" },
+                    { value: "false", label: "Tidak" },
+                  ]}
                 />
               </Form.Item>
               <Form.Item label="Pekerjaan" name="work">

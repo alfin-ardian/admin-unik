@@ -44,6 +44,7 @@ export const UserTable: React.FC<Props> = ({ kelompok }) => {
     city: item.city,
     district: item.district,
     address: item.address,
+    staff_name: item.staff_name,
     tb: item.tb,
     bb: item.bb,
     biography: item.biography,
