@@ -3,6 +3,7 @@ import {
   Login,
   Dashboard,
   CalonUser,
+  AddCalonUser,
   CalonTim,
   DataTim,
   AddDataTim,
@@ -67,6 +68,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Dashboard /> },
       { path: "/calon/user", element: <CalonUser /> },
+      { path: "/calon/user/tambah", element: <AddCalonUser /> },
       { path: "/calon/tim-pernikahan", element: <CalonTim /> },
       { path: "/daerah", element: <Daerah /> },
       { path: "/daerah/tambah", element: <AddDaerah /> },
