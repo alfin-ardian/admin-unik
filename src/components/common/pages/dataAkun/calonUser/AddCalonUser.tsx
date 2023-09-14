@@ -1,4 +1,4 @@
-import { usePostKelompok } from "@hooks/api";
+import { usePostUser } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import React, { useState, useEffect } from "react";
@@ -17,7 +17,9 @@ export const AddCalonUser: React.FC = () => {
   const [provinces, setProvinces] = useState<any>({});
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
-  const [dataCalonUser, setDataCalonUser] = useState<any>({});
+  const [dataCalonUser, setDataCalonUser] = useState<any>({
+    is_approved: false,
+  });
   const [daerah, setDaerah] = useState<any>({});
   const [desa, setDesa] = useState<any>({});
   const [kelompok, setKelompok] = useState<any>({});
@@ -46,7 +48,7 @@ export const AddCalonUser: React.FC = () => {
   }, [daerah, desa, kelompok, provinces, regencies, districts]);
 
   const onUpdate = () => {
-    usePostKelompok(dataCalonUser)
+    usePostUser(dataCalonUser)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {
