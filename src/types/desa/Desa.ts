@@ -1,8 +1,9 @@
 import { type Meta, type Pagination } from "..";
+import { ProvinceData, CityData, DistrictData, DaerahState } from "..";
 
 export interface DesaData {
   id: string;
-  daerah: Object;
+  daerah: DaerahState;
   name: string;
   description: string;
   leader: string;
@@ -13,14 +14,19 @@ export interface DesaData {
   whatsapp_staff: string;
   vice_staff: string;
   whatsapp_vice_staff: string;
-  province: string;
-  city: string;
-  district: string;
+  province: ProvinceData;
+  city: CityData;
+  district: DistrictData;
   address: string;
   latitude: number;
   longitude: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface DesaState {
+  id: string;
+  name: string;
 }
 
 export interface DesaFetchState {

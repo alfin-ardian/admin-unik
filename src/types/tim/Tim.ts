@@ -1,10 +1,12 @@
 import { type Meta, type Pagination } from "..";
 
+import { DaerahState, DesaState, KelompokState } from "..";
+
 export interface TimData {
   id: string;
-  daerah: Object;
-  desa: Object;
-  kelompok: Object;
+  daerah: DaerahState;
+  desa: DesaState;
+  kelompok: KelompokState;
   name: string;
   title: string;
   whatsapp: string;

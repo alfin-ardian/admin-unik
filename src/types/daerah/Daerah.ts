@@ -12,14 +12,37 @@ export interface DaerahData {
   whatsapp_staff: string;
   vice_staff: string;
   whatsapp_vice_staff: string;
-  province: string;
-  city: string;
-  district: string;
+  province: ProvinceData;
+  city: CityData;
+  district: DistrictData;
   address: string;
   latitude: number;
   longitude: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface DaerahState {
+  id: string;
+  name: string;
+}
+
+export interface ProvinceData {
+  name: string;
+  province_code: string;
+}
+
+export interface CityData {
+  name: string;
+  province_code: string;
+  regency_code: string;
+}
+
+export interface DistrictData {
+  name: string;
+  province_code: string;
+  regency_code: string;
+  district_code: string;
 }
 
 export interface DaerahFetchState {

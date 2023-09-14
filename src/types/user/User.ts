@@ -1,4 +1,12 @@
 import { type Meta, type Pagination } from "..";
+import {
+  ProvinceData,
+  CityData,
+  DistrictData,
+  DaerahState,
+  DesaState,
+  KelompokState,
+} from "..";
 
 export interface UserData {
   id: string;
@@ -9,13 +17,13 @@ export interface UserData {
   whatsapp: string;
   email: string;
   password: string;
-  daerah: Object;
-  desa: Object;
-  kelompok: Object;
+  daerah: DaerahState;
+  desa: DesaState;
+  kelompok: KelompokState;
   staff_name: string;
-  province: string;
-  city: string;
-  district: string;
+  province: ProvinceData;
+  city: CityData;
+  district: DistrictData;
   address: string;
   tb: number;
   bb: number;

@@ -1,9 +1,16 @@
 import { type Meta, type Pagination } from "..";
+import {
+  ProvinceData,
+  CityData,
+  DistrictData,
+  DaerahState,
+  DesaState,
+} from "..";
 
 export interface KelompokData {
   id: string;
-  daerah: Object;
-  desa: Object;
+  daerah: DaerahState;
+  desa: DesaState;
   name: string;
   description: string;
   leader: string;
@@ -14,14 +21,19 @@ export interface KelompokData {
   whatsapp_staff: string;
   vice_staff: string;
   whatsapp_vice_staff: string;
-  province: string;
-  city: string;
-  district: string;
+  province: ProvinceData;
+  city: CityData;
+  district: DistrictData;
   address: string;
   latitude: number;
   longitude: number;
   created_at: string;
   updated_at: string;
+}
+
+export interface KelompokState {
+  id: string;
+  name: string;
 }
 
 export interface KelompokFetchState {
