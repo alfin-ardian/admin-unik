@@ -2,7 +2,7 @@ import { usePostUser } from "@hooks/api";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import React, { useState, useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select, DatePicker } from "antd";
 import {
   SelectProvinces,
   SelectRegencies,
@@ -38,6 +38,7 @@ export const AddCalonUser: React.FC = () => {
 
   useEffect(() => {
     setDataCalonUser({
+      ...dataCalonUser,
       daerah: daerah,
       desa: desa,
       kelompok: kelompok,
@@ -98,13 +99,12 @@ export const AddCalonUser: React.FC = () => {
                 name="dob"
                 rules={[{ required: true }]}
               >
-                <Input
-                  type="date"
-                  defaultValue={dataCalonUser?.dob}
+                <DatePicker
+                  style={{ width: "100%" }}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      dob: e.target.value,
+                      dob: e,
                     })
                   }
                 />
@@ -263,22 +263,21 @@ export const AddCalonUser: React.FC = () => {
                 name="gender"
                 rules={[{ required: true }]}
               >
-                <Input
-                  placeholder="Pilih jenis kelamin"
-                  defaultValue={dataCalonUser?.gender}
+                <Select
+                  defaultValue="Pilih Jenis Kelamin"
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      gender: e.target.value,
+                      gender: e,
                     })
                   }
+                  options={[
+                    { value: "L", label: "Laki - laki" },
+                    { value: "P", label: "Perempuan" },
+                  ]}
                 />
               </Form.Item>
-              <Form.Item
-                label="Keterangan"
-                name="description"
-                rules={[{ required: true }]}
-              >
+              <Form.Item label="Keterangan" name="description">
                 <Input
                   placeholder="Ketik keterangan"
                   defaultValue={dataCalonUser?.description}
@@ -364,14 +363,14 @@ export const AddCalonUser: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Berat Badan" name="tb">
+              <Form.Item label="Berat Badan" name="bb">
                 <Input
                   placeholder="Ketik berat badan (kg)"
-                  defaultValue={dataCalonUser?.tb}
+                  defaultValue={dataCalonUser?.bb}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
-                      tb: e.target.value,
+                      bb: e.target.value,
                     })
                   }
                 />
