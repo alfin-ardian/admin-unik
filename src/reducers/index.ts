@@ -1,4 +1,5 @@
 // data akun
+export * from "./user";
 export * from "./tim";
 
 // data master

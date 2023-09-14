@@ -38,7 +38,7 @@ export const SidebarMenuList: React.FC<Props> = ({
       <p className="title mt-2 mb-2 border-t border-b p-4">Data Akun</p>
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
-        to={"/"}
+        to={"/calon/user"}
         label="Calon User"
         active={isRoot}
         collapse={collapse}
