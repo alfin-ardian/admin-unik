@@ -1,13 +1,13 @@
 import type { InputRef } from "antd";
 import { useDelDesa } from "@hooks/api";
-import { useNavigate } from "react-router-dom";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
+import { useNavigate, useLocation } from "react-router-dom";
 import type { ColumnType, ColumnsType } from "antd/es/table";
 import type { FilterConfirmProps } from "antd/es/table/interface";
-import toast, { Toaster } from "react-hot-toast";
 
 interface DataType {
   id: string;
@@ -23,6 +23,7 @@ interface Props {
   kelompok: any;
 }
 export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dataNew: DataType[] = kelompok?.map((item: any) => ({
     id: item._id,
@@ -224,7 +225,11 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
       key: "city",
       render: (value, record, index) => (
         <Space key={index}>
-          <Button onClick={() => navigate("/desa/detail", { state: record })}>
+          <Button
+            onClick={() =>
+              navigate(location.pathname + "/detail", { state: record })
+            }
+          >
             Detail
           </Button>
           <Button danger value={value} onClick={() => onDeleteData(record.id)}>
