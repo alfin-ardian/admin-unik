@@ -18,6 +18,7 @@ export const DetailCalonUser: React.FC = () => {
   const navigate = useNavigate();
   const dateFormat = "DD-MM-YYYY";
   const { state: calonUserDetail } = useLocation();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
   const [provinces, setProvinces] = useState<any>({
     name: calonUserDetail?.province,
     province_code: "",
@@ -76,10 +77,19 @@ export const DetailCalonUser: React.FC = () => {
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
         <div className="flex space-x-4 justify-end mb-2">
-          <Button onClick={() => navigate(-1)}>Kembali</Button>
-          <Button htmlType="submit" onClick={() => onUpdate()}>
-            Submit
-          </Button>
+          {isEdit ? (
+            <>
+              <Button onClick={() => setIsEdit(!isEdit)}>Batal</Button>
+              <Button htmlType="submit" onClick={() => onUpdate()}>
+                Submit
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={() => navigate(-1)}>Kembali</Button>
+              <Button onClick={() => setIsEdit(!isEdit)}>Edit</Button>
+            </>
+          )}
         </div>
         <Form
           name="wrap"
@@ -96,6 +106,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Nama" name="name" rules={[{ required: true }]}>
                 <Input
                   placeholder="Nama Lengkap"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.name}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -112,6 +123,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <DatePicker
                   placeholder="Pilih tanggal lahir"
+                  disabled={!isEdit}
                   defaultValue={dayjs(
                     dayjs(dataCalonUser?.dob).format("DD-MM-YYYY"),
                     dateFormat
@@ -133,6 +145,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Ketik nomor whatsapp"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.whatsapp}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -149,6 +162,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Ketik password"
+                  disabled={!isEdit}
                   type="password"
                   defaultValue={dataCalonUser?.password}
                   onChange={(e: any) =>
@@ -164,7 +178,11 @@ export const DetailCalonUser: React.FC = () => {
                 name="daerah"
                 rules={[{ required: true }]}
               >
-                <SelectDaerah setDaerah={setDaerah} daerah={daerah} />
+                <SelectDaerah
+                  setDaerah={setDaerah}
+                  daerah={daerah}
+                  disabled={!isEdit}
+                />
               </Form.Item>
               <Form.Item
                 label="Pilih Kelompok"
@@ -172,6 +190,7 @@ export const DetailCalonUser: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <SelectKelompok
+                  disabled={!isEdit}
                   setKelompok={setKelompok}
                   kelompok={kelompok}
                   desa={desa}
@@ -181,17 +200,20 @@ export const DetailCalonUser: React.FC = () => {
                 <SelectProvinces
                   setProvinces={setProvinces}
                   provinces={provinces}
+                  disabled={!isEdit}
                 />
               </Form.Item>
               <Form.Item label="Kecamatan" name="district">
                 <SelectDistricts
                   setDistricts={setDistricts}
                   districts={districts}
+                  disabled={!isEdit}
                 />
               </Form.Item>
               <Form.Item label="Tinggi Badan" name="tb">
                 <Input
                   placeholder="Ketik tinggi badan (cm)"
+                  disabled={!isEdit}
                   type="number"
                   defaultValue={dataCalonUser?.tb}
                   onChange={(e: any) =>
@@ -205,6 +227,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Biography" name="biography">
                 <Input
                   placeholder="Ketik tentang anda"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.biography}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -217,6 +240,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Jumlah Saudara" name="jumlah_saudara">
                 <Input
                   placeholder="Berapa jumlah saudara anda"
+                  disabled={!isEdit}
                   type="number"
                   defaultValue={dataCalonUser?.jumlah_saudara}
                   onChange={(e: any) =>
@@ -230,6 +254,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Pendidikan Terakhir" name="last_education">
                 <Input
                   placeholder="Pilih pendidikan terakhir anda"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.last_education}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -242,6 +267,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Jurusan" name="major">
                 <Input
                   placeholder="Ketik Jurusan"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.major}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -254,6 +280,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Mubalight?" name="is_mt">
                 <Select
                   placeholder="Apakah anda seorang mubalight / mubalighot"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.is_mt ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -270,6 +297,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Sarjana?" name="is_sarjana">
                 <Select
                   placeholder="Apakah anda seorang sarjana"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.is_sarjana ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -292,6 +320,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Select
                   defaultValue="Pilih Jenis Kelamin"
+                  disabled={!isEdit}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
@@ -311,6 +340,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Select
                   defaultValue={dataCalonUser?.is_approved ? "Iya" : "Tidak"}
+                  disabled={!isEdit}
                   onChange={(e: any) =>
                     setDataCalonUser({
                       ...dataCalonUser,
@@ -330,6 +360,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Ketik email"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.email}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -346,6 +377,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Ketik ulang password"
+                  disabled={!isEdit}
                   type="password"
                   defaultValue={dataCalonUser?.confirm_password}
                   onChange={(e: any) =>
@@ -361,7 +393,12 @@ export const DetailCalonUser: React.FC = () => {
                 name="desa"
                 rules={[{ required: true }]}
               >
-                <SelectDesa daerah={daerah} setDesa={setDesa} desa={desa} />
+                <SelectDesa
+                  daerah={daerah}
+                  setDesa={setDesa}
+                  desa={desa}
+                  disabled={!isEdit}
+                />
               </Form.Item>
               <Form.Item
                 label="Tim Pernikahan Kelompok"
@@ -370,6 +407,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Sebutkan nama tim pernikahan kelompok anda"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.staff_name}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -383,11 +421,13 @@ export const DetailCalonUser: React.FC = () => {
                 <SelectRegencies
                   setRegencies={setRegencies}
                   regencies={regencies}
+                  disabled={!isEdit}
                 />
               </Form.Item>
               <Form.Item label="Alamat" name="address">
                 <Input
                   placeholder="Ketik alamat lengkap"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.address}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -400,6 +440,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Berat Badan" name="bb">
                 <Input
                   placeholder="Ketik berat badan (kg)"
+                  disabled={!isEdit}
                   type="number"
                   defaultValue={dataCalonUser?.bb}
                   onChange={(e: any) =>
@@ -413,6 +454,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Hobbi" name="hobbies">
                 <Input
                   placeholder="Ketik hobbi anda"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.hobbies}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -425,6 +467,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Anak Ke-" name="anak_ke">
                 <Input
                   placeholder="Anak nomor berapa"
+                  disabled={!isEdit}
                   type="number"
                   defaultValue={dataCalonUser?.anak_ke}
                   onChange={(e: any) =>
@@ -441,6 +484,7 @@ export const DetailCalonUser: React.FC = () => {
               >
                 <Input
                   placeholder="Ketik sekolah atau kampus"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.instance_education}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -453,6 +497,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Ponpes" name="ponpes">
                 <Input
                   placeholder="Sebutkan nama pondok anda"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.ponpes}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -465,6 +510,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="HB?" name="is_hb">
                 <Select
                   placeholder="Apakah anda khatam hadist besar"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.is_hb ? "Iya" : "Tidak"}
                   onChange={(e: any) =>
                     setDataCalonUser({
@@ -481,6 +527,7 @@ export const DetailCalonUser: React.FC = () => {
               <Form.Item label="Pekerjaan" name="work">
                 <Input
                   placeholder="Ketik pekerjaan"
+                  disabled={!isEdit}
                   defaultValue={dataCalonUser?.work}
                   onChange={(e: any) =>
                     setDataCalonUser({
