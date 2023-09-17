@@ -9,7 +9,7 @@ import {
   SelectKelompok,
 } from "@components/common/atoms";
 
-export const DetailDataTim: React.FC = () => {
+export const DetailCalonTim: React.FC = () => {
   const navigate = useNavigate();
   const { state: dataTimDetail } = useLocation();
   const [isEdit, setIsEdit] = useState<boolean>(false);

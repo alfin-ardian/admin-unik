@@ -36,7 +36,6 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
     kelompok: item.kelompok,
     name: item.name,
     title: item.title,
-    username: item.username,
     whatsapp: item.whatsapp,
     email: item.email,
     is_approved: item.is_approved,
@@ -278,7 +277,7 @@ export const TimTable: React.FC<Props> = ({ kelompok }) => {
         <Space key={index}>
           <Button
             onClick={() =>
-              navigate("/data/tim-pernikahan/detail", { state: record })
+              navigate(location.pathname + "/detail", { state: record })
             }
           >
             Detail

@@ -23,6 +23,9 @@ export const usePutTim = async (val: any) => {
   try {
     const response = await updateData(token);
     const jsonData = await response.json();
+    if (jsonData.meta.status !== 200) {
+      return await Promise.reject(jsonData);
+    }
     return await Promise.resolve(jsonData);
   } catch (err) {
     return await Promise.reject(err);

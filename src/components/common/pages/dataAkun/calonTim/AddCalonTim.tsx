@@ -1,6 +1,6 @@
-import { usePutTim } from "@hooks/api";
+import { usePostTim } from "@hooks/api";
 import { Button, Form, Input } from "antd";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import React, { useState, useEffect } from "react";
 import {
@@ -9,26 +9,26 @@ import {
   SelectKelompok,
 } from "@components/common/atoms";
 
-export const DetailDataTim: React.FC = () => {
+export const AddCalonTim: React.FC = () => {
   const navigate = useNavigate();
-  const { state: dataTimDetail } = useLocation();
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [dataTim, setDataTim] = useState<any>(dataTimDetail);
-  const [daerah, setDaerah] = useState<any>(dataTimDetail?.daerah);
-  const [desa, setDesa] = useState<any>(dataTimDetail?.desa);
-  const [kelompok, setKelompok] = useState<any>(dataTimDetail?.kelompok);
+  const [dataKelompok, setDataKelompok] = useState<any>({
+    is_approved: false,
+  });
+  const [daerah, setDaerah] = useState<any>({});
+  const [desa, setDesa] = useState<any>({});
+  const [kelompok, setKelompok] = useState<any>({});
 
   useEffect(() => {
-    setDataTim({
-      ...dataTim,
+    setDataKelompok({
+      ...dataKelompok,
       daerah: daerah,
       desa: desa,
       kelompok: kelompok,
     });
   }, [daerah, desa, kelompok]);
 
-  const onUpdate = () => {
-    usePutTim(dataTim)
+  const onSubmit = () => {
+    usePostTim(dataKelompok)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {
@@ -44,19 +44,10 @@ export const DetailDataTim: React.FC = () => {
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
         <div className="flex space-x-4 justify-end mb-2">
-          {isEdit ? (
-            <>
-              <Button onClick={() => setIsEdit(!isEdit)}>Batal</Button>
-              <Button htmlType="submit" onClick={() => onUpdate()}>
-                Submit
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button onClick={() => navigate(-1)}>Kembali</Button>
-              <Button onClick={() => setIsEdit(!isEdit)}>Edit</Button>
-            </>
-          )}
+          <Button onClick={() => navigate(-1)}>Kembali</Button>
+          <Button htmlType="submit" onClick={() => onSubmit()}>
+            Submit
+          </Button>
         </div>
         <Form
           name="wrap"
@@ -75,11 +66,7 @@ export const DetailDataTim: React.FC = () => {
                 name="daerah"
                 rules={[{ required: true }]}
               >
-                <SelectDaerah
-                  setDaerah={setDaerah}
-                  daerah={daerah}
-                  disabled={!isEdit}
-                />
+                <SelectDaerah setDaerah={setDaerah} daerah={daerah} />
               </Form.Item>
               <Form.Item
                 label="Pilih Kelompok"
@@ -90,15 +77,13 @@ export const DetailDataTim: React.FC = () => {
                   desa={desa}
                   setKelompok={setKelompok}
                   kelompok={kelompok}
-                  disabled={!isEdit}
                 />
               </Form.Item>
               <Form.Item label="Nama" name="name" rules={[{ required: true }]}>
                 <Input
-                  defaultValue={dataTim?.name}
-                  disabled={!isEdit}
+                  defaultValue={dataKelompok?.name}
                   onChange={(e: any) =>
-                    setDataTim({ ...dataTim, name: e.target.value })
+                    setDataKelompok({ ...dataKelompok, name: e.target.value })
                   }
                 />
               </Form.Item>
@@ -108,11 +93,10 @@ export const DetailDataTim: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  defaultValue={dataTim?.whatsapp}
-                  disabled={!isEdit}
+                  defaultValue={dataKelompok?.whatsapp}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       whatsapp: e.target.value,
                     })
                   }
@@ -125,10 +109,9 @@ export const DetailDataTim: React.FC = () => {
               >
                 <Input
                   type="password"
-                  disabled={!isEdit}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       password: e.target.value,
                     })
                   }
@@ -136,11 +119,10 @@ export const DetailDataTim: React.FC = () => {
               </Form.Item>
               <Form.Item label="Lampiran" name="attachments">
                 <Input
-                  defaultValue={dataTim?.attachments}
-                  disabled={!isEdit}
+                  defaultValue={dataKelompok?.attachments}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       attachments: e.target.value,
                     })
                   }
@@ -153,12 +135,7 @@ export const DetailDataTim: React.FC = () => {
                 name="desa"
                 rules={[{ required: true }]}
               >
-                <SelectDesa
-                  daerah={daerah}
-                  setDesa={setDesa}
-                  desa={desa}
-                  disabled={!isEdit}
-                />
+                <SelectDesa daerah={daerah} setDesa={setDesa} desa={desa} />
               </Form.Item>
               <Form.Item
                 label="Dapukan"
@@ -166,11 +143,10 @@ export const DetailDataTim: React.FC = () => {
                 rules={[{ required: true }]}
               >
                 <Input
-                  defaultValue={dataTim?.title}
-                  disabled={!isEdit}
+                  defaultValue={dataKelompok?.title}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       title: e.target.value,
                     })
                   }
@@ -178,24 +154,11 @@ export const DetailDataTim: React.FC = () => {
               </Form.Item>
               <Form.Item label="Email" name="email">
                 <Input
-                  defaultValue={dataTim?.email}
-                  disabled={!isEdit}
+                  defaultValue={dataKelompok?.email}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       email: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
-              <Form.Item label="Keterangan" name="description">
-                <Input
-                  defaultValue={dataTim?.description}
-                  disabled={!isEdit}
-                  onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
-                      description: e.target.value,
                     })
                   }
                 />
@@ -207,11 +170,21 @@ export const DetailDataTim: React.FC = () => {
               >
                 <Input
                   type="password"
-                  disabled={!isEdit}
                   onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
+                    setDataKelompok({
+                      ...dataKelompok,
                       confirm_password: e.target.value,
+                    })
+                  }
+                />
+              </Form.Item>
+              <Form.Item label="Keterangan" name="description">
+                <Input
+                  defaultValue={dataKelompok?.description}
+                  onChange={(e: any) =>
+                    setDataKelompok({
+                      ...dataKelompok,
+                      description: e.target.value,
                     })
                   }
                 />

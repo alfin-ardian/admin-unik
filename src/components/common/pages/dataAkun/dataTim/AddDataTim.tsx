@@ -152,21 +152,6 @@ export const AddDataTim: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item
-                label="Username"
-                name="username"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  defaultValue={dataKelompok?.username}
-                  onChange={(e: any) =>
-                    setDataKelompok({
-                      ...dataKelompok,
-                      username: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
               <Form.Item label="Email" name="email">
                 <Input
                   defaultValue={dataKelompok?.email}

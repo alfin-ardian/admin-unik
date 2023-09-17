@@ -61,8 +61,6 @@ export const AddCalonUser: React.FC = () => {
       });
   };
 
-  console.log(dataCalonUser, "dataCalonUser");
-
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
