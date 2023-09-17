@@ -42,9 +42,9 @@ export const AddCalonUser: React.FC = () => {
       daerah: daerah,
       desa: desa,
       kelompok: kelompok,
-      provinces: provinces.name,
-      city: regencies.name,
-      districts: districts.name,
+      provinces: provinces,
+      city: regencies,
+      districts: districts,
     });
   }, [daerah, desa, kelompok, provinces, regencies, districts]);
 
@@ -60,6 +60,8 @@ export const AddCalonUser: React.FC = () => {
         toast.error(err.meta.message);
       });
   };
+
+  console.log(dataCalonUser, "dataCalonUser");
 
   return (
     <>
