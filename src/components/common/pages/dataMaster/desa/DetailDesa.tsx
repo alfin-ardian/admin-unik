@@ -38,34 +38,33 @@ export const DetailDesa: React.FC = () => {
     lng: 111.11001,
   });
 
-  const [provinces, setProvinces] = useState<any>({});
-  const [regencies, setRegencies] = useState<any>({ province_code: "" });
-  const [districts, setDistricts] = useState<any>({ regency_code: "" });
+  console.log(desaDetail, "desaDetail");
+  const [provinces, setProvinces] = useState<any>(desaDetail?.province);
+  const [regencies, setRegencies] = useState<any>(desaDetail?.city);
+  const [districts, setDistricts] = useState<any>(desaDetail?.district);
   const [dataDesa, setDataDesa] = useState<any>(desaDetail);
   const [daerah, setDaerah] = useState<any>(desaDetail?.daerah);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces?.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
-      city: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies?.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
 
   useEffect(() => {
     setDataDesa({
       ...dataDesa,
-      districts: districts.name,
+      province: provinces,
+      city: regencies,
+      district: districts,
     });
-  }, [districts]);
+  }, [provinces, regencies, districts]);
 
   useEffect(() => {
     setDataDesa({

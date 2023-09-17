@@ -38,7 +38,7 @@ export const SelectDistricts: React.FC<Props> = ({
       onChange={handleChangeDistricts}
       options={options}
       disabled={disabled}
-      defaultValue={districts.name}
+      defaultValue={districts?.name}
     />
   );
 };

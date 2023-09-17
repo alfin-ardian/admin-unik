@@ -1,5 +1,5 @@
 import type { InputRef } from "antd";
-import { useDelDesa } from "@hooks/api";
+import { useDelKelompok } from "@hooks/api";
 import Highlighter from "react-highlight-words";
 import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -66,7 +66,7 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
   };
 
   const onDeleteData = (id: string) => {
-    useDelDesa(id)
+    useDelKelompok(id)
       .then((res) => {
         toast.success(res.meta.message);
         setTimeout(() => {

@@ -38,7 +38,7 @@ export const SelectRegencies: React.FC<Props> = ({
       onChange={handleChangeRegencies}
       options={options}
       disabled={disabled}
-      defaultValue={regencies.name}
+      defaultValue={regencies?.name}
     />
   );
 };

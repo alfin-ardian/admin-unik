@@ -31,7 +31,7 @@ export const SelectProvinces: React.FC<Props> = ({
       onChange={handleChangeProvince}
       options={options}
       disabled={disabled}
-      defaultValue={provinces.name}
+      defaultValue={provinces?.name}
     />
   );
 };
