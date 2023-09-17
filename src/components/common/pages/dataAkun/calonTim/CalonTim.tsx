@@ -15,7 +15,7 @@ export const CalonTim: React.FC = () => {
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
       <div className="flex justify-end p-4">
         <Button
-          className="flex items-center gap-1 text-white bg-sky-600 hover:bg-sky-700 font-medium border border-sky-600 px-4 py-2 rounded-lg"
+          className="flex items-center gap-1 text-white bg-sky-600 hover:bg-sky-700 font-medium border border-sky-600 px-5 py-5 rounded-lg"
           onClick={() => navigate(location.pathname + "/tambah")}
         >
           + Tambah
