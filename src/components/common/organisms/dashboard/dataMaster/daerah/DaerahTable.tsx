@@ -12,7 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 interface DataType {
   id: string;
   name: string;
-  city: string;
+  city_name: string;
   leader: string;
   staff: string;
   whatsapp_staff: string;
@@ -38,6 +38,7 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
     whatsapp_vice_staff: item.whatsapp_vice_staff,
     province: item.province,
     city: item.city,
+    city_name: item.city.name,
     district: item.district,
     address: item.address,
     latitude: item.latitude,
@@ -188,10 +189,10 @@ export const DaerahTable: React.FC<Props> = ({ daerah }) => {
     },
     {
       title: "Kota",
-      dataIndex: "city",
-      key: "city",
-      ...getColumnSearchProps("city"),
-      sorter: (a, b) => a.city.length - b.city.length,
+      dataIndex: "city_name",
+      key: "city_name",
+      ...getColumnSearchProps("city_name"),
+      sorter: (a, b) => a.city_name.length - b.city_name.length,
       sortDirections: ["descend", "ascend"],
     },
     {

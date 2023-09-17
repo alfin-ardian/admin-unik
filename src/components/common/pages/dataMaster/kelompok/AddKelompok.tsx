@@ -45,35 +45,27 @@ export const AddKelompok: React.FC = () => {
   const [desa, setDesa] = useState<any>({});
 
   useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
-      city: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
-
-  useEffect(() => {
-    setDataKelompok({
-      ...dataKelompok,
-      districts: districts.name,
-    });
-  }, [districts]);
 
   useEffect(() => {
     setDataKelompok({
       ...dataKelompok,
       daerah: daerah,
       desa: desa,
+      provinces: provinces,
+      city: regencies,
+      districts: districts,
     });
-  }, [dataKelompok]);
+  }, [daerah, desa, provinces, regencies, districts]);
 
   const onUpdate = () => {
     usePostKelompok(dataKelompok)

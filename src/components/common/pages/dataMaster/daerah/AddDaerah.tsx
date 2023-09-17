@@ -41,27 +41,25 @@ export const AddDaerah: React.FC = () => {
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      regencies: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
 
   useEffect(() => {
     setDataDaerah({
       ...dataDaerah,
-      districts: districts.name,
+      provinces: provinces,
+      city: regencies,
+      districts: districts,
     });
-  }, [districts]);
+  }, [provinces, regencies, districts]);
 
   const onUpdate = () => {
     usePostDaerah(dataDaerah)

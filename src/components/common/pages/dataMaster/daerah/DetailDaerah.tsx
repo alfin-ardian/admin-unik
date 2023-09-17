@@ -4,7 +4,7 @@ import GoogleMapReact from "google-map-react";
 import { API_GOOGLE_MAP } from "@utils/Config";
 import { Button, Form, Input, Tooltip } from "antd";
 import { EnvironmentFilled } from "@ant-design/icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import {
   SelectProvinces,
@@ -29,6 +29,7 @@ const AnyReactComponent: React.FC<Props> = ({ text, onClick, style }) => (
 );
 
 export const DetailDaerah: React.FC = () => {
+  const navigate = useNavigate();
   const { state: daerahDetail } = useLocation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [dataDaerah, setDataDaerah] = useState<any>(daerahDetail);
@@ -37,41 +38,30 @@ export const DetailDaerah: React.FC = () => {
     lng: dataDaerah?.longitude,
   });
 
-  const [provinces, setProvinces] = useState<any>({
-    name: dataDaerah?.province,
-    province_code: "",
-  });
-  const [regencies, setRegencies] = useState<any>({
-    name: dataDaerah?.city,
-    province_code: "",
-  });
-  const [districts, setDistricts] = useState<any>({
-    name: dataDaerah?.district,
-    regency_code: "",
-  });
+  const [provinces, setProvinces] = useState<any>(daerahDetail?.province);
+  const [regencies, setRegencies] = useState<any>(daerahDetail?.city);
+  const [districts, setDistricts] = useState<any>(daerahDetail?.district);
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      province: provinces?.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataDaerah({
-      ...dataDaerah,
-      city: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
 
   useEffect(() => {
     setDataDaerah({
       ...dataDaerah,
-      district: districts.name,
+      province: provinces,
+      city: regencies,
+      district: districts,
     });
-  }, [districts]);
+  }, [provinces, regencies, districts]);
 
   useEffect(() => {
     setCenter({
@@ -85,6 +75,7 @@ export const DetailDaerah: React.FC = () => {
       .then(() => {
         toast.success("Data berhasil diupdate");
         setIsEdit(!isEdit);
+        navigate(-1);
       })
       .catch((err) => {
         toast.error(err.message);

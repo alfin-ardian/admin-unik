@@ -43,34 +43,26 @@ export const AddDesa: React.FC = () => {
   const [daerah, setDaerah] = useState<any>({});
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
-      provinces: provinces.name,
-    });
-    setRegencies({ ...regencies, province_code: provinces.province_code });
+    if (provinces.province_code) {
+      setRegencies({ ...regencies, province_code: provinces.province_code });
+    }
   }, [provinces]);
 
   useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
-      city: regencies.name,
-    });
-    setDistricts({ ...districts, regency_code: regencies.regency_code });
+    if (regencies.regency_code) {
+      setDistricts({ ...districts, regency_code: regencies.regency_code });
+    }
   }, [regencies]);
 
   useEffect(() => {
     setDataDesa({
       ...dataDesa,
-      districts: districts.name,
-    });
-  }, [districts]);
-
-  useEffect(() => {
-    setDataDesa({
-      ...dataDesa,
       daerah: daerah,
+      provinces: provinces,
+      city: regencies,
+      districts: districts,
     });
-  }, [dataDesa]);
+  }, [daerah, provinces, regencies, districts]);
 
   const onUpdate = () => {
     usePostDesa(dataDesa)

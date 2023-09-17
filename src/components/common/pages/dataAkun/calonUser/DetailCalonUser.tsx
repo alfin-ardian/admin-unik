@@ -19,18 +19,9 @@ export const DetailCalonUser: React.FC = () => {
   const dateFormat = "DD-MM-YYYY";
   const { state: calonUserDetail } = useLocation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [provinces, setProvinces] = useState<any>({
-    name: calonUserDetail?.province,
-    province_code: "",
-  });
-  const [regencies, setRegencies] = useState<any>({
-    name: calonUserDetail?.city,
-    province_code: "",
-  });
-  const [districts, setDistricts] = useState<any>({
-    name: calonUserDetail?.district,
-    regency_code: "",
-  });
+  const [provinces, setProvinces] = useState<any>(calonUserDetail?.province);
+  const [regencies, setRegencies] = useState<any>(calonUserDetail?.city);
+  const [districts, setDistricts] = useState<any>(calonUserDetail?.district);
   const [dataCalonUser, setDataCalonUser] = useState<any>(calonUserDetail);
   const [daerah, setDaerah] = useState<any>(calonUserDetail?.daerah);
   const [desa, setDesa] = useState<any>(calonUserDetail?.desa);
@@ -54,9 +45,9 @@ export const DetailCalonUser: React.FC = () => {
       daerah: daerah,
       desa: desa,
       kelompok: kelompok,
-      province: provinces.name,
-      city: regencies.name,
-      district: districts.name,
+      province: provinces,
+      city: regencies,
+      district: districts,
     });
   }, [daerah, desa, kelompok, provinces, regencies, districts]);
 
