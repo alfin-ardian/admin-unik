@@ -37,8 +37,6 @@ export const DetailDesa: React.FC = () => {
     lat: -7.413882,
     lng: 111.11001,
   });
-
-  console.log(desaDetail, "desaDetail");
   const [provinces, setProvinces] = useState<any>(desaDetail?.province);
   const [regencies, setRegencies] = useState<any>(desaDetail?.city);
   const [districts, setDistricts] = useState<any>(desaDetail?.district);
