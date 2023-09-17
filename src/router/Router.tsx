@@ -10,6 +10,7 @@ import {
   CalonTim,
   DataTim,
   AddDataTim,
+  DetailDataTim,
   Daerah,
   AddDaerah,
   DetailDaerah,
@@ -88,6 +89,7 @@ export const router = createBrowserRouter([
       { path: "/kelompok/detail", element: <DetailKelompok /> },
       { path: "/data/tim-pernikahan", element: <DataTim /> },
       { path: "/data/tim-pernikahan/tambah", element: <AddDataTim /> },
+      { path: "/data/tim-pernikahan/detail", element: <DetailDataTim /> },
     ],
   },
 ]);
