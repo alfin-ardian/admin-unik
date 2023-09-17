@@ -61,9 +61,9 @@ export const AddKelompok: React.FC = () => {
       ...dataKelompok,
       daerah: daerah,
       desa: desa,
-      provinces: provinces,
+      province: provinces,
       city: regencies,
-      districts: districts,
+      district: districts,
     });
   }, [daerah, desa, provinces, regencies, districts]);
 

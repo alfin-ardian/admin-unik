@@ -39,18 +39,9 @@ export const DetailKelompok: React.FC = () => {
     lng: 111.11001,
   });
 
-  const [provinces, setProvinces] = useState<any>({
-    name: detailKelompok?.province,
-    province_code: "",
-  });
-  const [regencies, setRegencies] = useState<any>({
-    name: detailKelompok?.city,
-    province_code: "",
-  });
-  const [districts, setDistricts] = useState<any>({
-    name: detailKelompok?.district,
-    regency_code: "",
-  });
+  const [provinces, setProvinces] = useState<any>(detailKelompok?.province);
+  const [regencies, setRegencies] = useState<any>(detailKelompok?.city);
+  const [districts, setDistricts] = useState<any>(detailKelompok?.district);
   const [dataKelompok, setDataKelompok] = useState<any>(detailKelompok);
   const [daerah, setDaerah] = useState<any>(detailKelompok?.daerah);
   const [desa, setDesa] = useState<any>(detailKelompok?.desa);
@@ -72,9 +63,9 @@ export const DetailKelompok: React.FC = () => {
       ...dataKelompok,
       daerah: daerah,
       desa: desa,
-      province: provinces.name,
-      city: regencies.name,
-      district: districts.name,
+      province: provinces,
+      city: regencies,
+      district: districts,
     });
   }, [daerah, desa, provinces, regencies, districts]);
 

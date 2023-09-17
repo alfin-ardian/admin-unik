@@ -12,7 +12,7 @@ import type { FilterConfirmProps } from "antd/es/table/interface";
 interface DataType {
   id: string;
   name: string;
-  city: string;
+  city_name: string;
   leader: string;
   staff: string;
   whatsapp_staff: string;
@@ -25,6 +25,7 @@ interface Props {
 export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(kelompok, "kelompok");
   const dataNew: DataType[] = kelompok?.map((item: any) => ({
     id: item._id,
     daerah: item.daerah,
@@ -41,6 +42,7 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
     whatsapp_vice_staff: item.whatsapp_vice_staff,
     province: item.province,
     city: item.city,
+    city_name: item.city.name,
     district: item.district,
     address: item.address,
     latitude: item.latitude,
@@ -191,10 +193,10 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
     },
     {
       title: "Kota",
-      dataIndex: "city",
-      key: "city",
-      ...getColumnSearchProps("city"),
-      sorter: (a, b) => a.city.length - b.city.length,
+      dataIndex: "city_name",
+      key: "city_name",
+      ...getColumnSearchProps("city_name"),
+      sorter: (a, b) => a.city_name.length - b.city_name.length,
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -221,8 +223,8 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
     },
     {
       title: "Aksi",
-      dataIndex: "city",
-      key: "city",
+      dataIndex: "action",
+      key: "action",
       render: (value, record, index) => (
         <Space key={index}>
           <Button
