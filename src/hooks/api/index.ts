@@ -13,3 +13,6 @@ export * from "./login";
 export * from "./daerah";
 export * from "./desa";
 export * from "./kelompok";
+
+// data marketing
+export * from "./dataMarketing";

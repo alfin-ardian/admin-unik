@@ -1,3 +1,5 @@
+import { Component } from "react";
+import { RootView } from "./RootView";
 import { createBrowserRouter } from "react-router-dom";
 import {
   Login,
@@ -22,9 +24,9 @@ import {
   Kelompok,
   AddKelompok,
   DetailKelompok,
+  Badge,
+  AddBadge,
 } from "@components/common/pages";
-import { RootView } from "./RootView";
-import { Component } from "react";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -94,6 +96,8 @@ export const router = createBrowserRouter([
       { path: "/data/tim-pernikahan", element: <DataTim /> },
       { path: "/data/tim-pernikahan/tambah", element: <AddDataTim /> },
       { path: "/data/tim-pernikahan/detail", element: <DetailDataTim /> },
+      { path: "/badge", element: <Badge /> },
+      { path: "/badge/tambah", element: <AddBadge /> },
     ],
   },
 ]);

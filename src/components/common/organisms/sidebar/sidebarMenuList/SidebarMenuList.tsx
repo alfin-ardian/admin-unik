@@ -96,7 +96,7 @@ export const SidebarMenuList: React.FC<Props> = ({
       <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
-        to={"/"}
+        to={"/badge"}
         label="Badge"
         active={isRoot}
         collapse={collapse}
