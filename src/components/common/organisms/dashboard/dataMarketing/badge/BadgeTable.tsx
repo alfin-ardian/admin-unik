@@ -172,6 +172,8 @@ export const BadgeTable: React.FC<Props> = ({ badge }) => {
       key: "name",
       width: "15%",
       ...getColumnSearchProps("name"),
+      sorter: (a, b) => a.name.length - b.name.length,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Deskripsi",
@@ -192,6 +194,8 @@ export const BadgeTable: React.FC<Props> = ({ badge }) => {
       dataIndex: "price",
       key: "price",
       ...getColumnSearchProps("price"),
+      sorter: (a, b) => a.price.length - b.price.length,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Aksi",
