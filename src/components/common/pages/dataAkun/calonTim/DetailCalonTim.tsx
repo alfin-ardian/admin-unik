@@ -118,22 +118,6 @@ export const DetailCalonTim: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  type="password"
-                  disabled={!isEdit}
-                  onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
               <Form.Item label="Lampiran" name="attachments">
                 <Input
                   defaultValue={dataTim?.attachments}
@@ -196,22 +180,6 @@ export const DetailCalonTim: React.FC = () => {
                     setDataTim({
                       ...dataTim,
                       description: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
-              <Form.Item
-                label="Konfirmasi Password"
-                name="confirm_password"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  type="password"
-                  disabled={!isEdit}
-                  onChange={(e: any) =>
-                    setDataTim({
-                      ...dataTim,
-                      confirm_password: e.target.value,
                     })
                   }
                 />

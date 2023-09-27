@@ -147,24 +147,6 @@ export const DetailCalonUser: React.FC = () => {
                 />
               </Form.Item>
               <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  placeholder="Ketik password"
-                  disabled={!isEdit}
-                  type="password"
-                  defaultValue={dataCalonUser?.password}
-                  onChange={(e: any) =>
-                    setDataCalonUser({
-                      ...dataCalonUser,
-                      password: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
-              <Form.Item
                 label="Pilih Daerah"
                 name="daerah"
                 rules={[{ required: true }]}
@@ -357,24 +339,6 @@ export const DetailCalonUser: React.FC = () => {
                     setDataCalonUser({
                       ...dataCalonUser,
                       email: e.target.value,
-                    })
-                  }
-                />
-              </Form.Item>
-              <Form.Item
-                label="Konfirm Password"
-                name="confirm_password"
-                rules={[{ required: true }]}
-              >
-                <Input
-                  placeholder="Ketik ulang password"
-                  disabled={!isEdit}
-                  type="password"
-                  defaultValue={dataCalonUser?.confirm_password}
-                  onChange={(e: any) =>
-                    setDataCalonUser({
-                      ...dataCalonUser,
-                      confirm_password: e.target.value,
                     })
                   }
                 />
