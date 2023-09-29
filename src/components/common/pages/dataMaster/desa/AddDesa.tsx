@@ -58,9 +58,9 @@ export const AddDesa: React.FC = () => {
     setDataDesa({
       ...dataDesa,
       daerah: daerah,
-      provinces: provinces,
+      province: provinces,
       city: regencies,
-      districts: districts,
+      district: districts,
     });
   }, [daerah, provinces, regencies, districts]);
 

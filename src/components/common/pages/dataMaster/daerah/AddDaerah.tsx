@@ -55,9 +55,9 @@ export const AddDaerah: React.FC = () => {
   useEffect(() => {
     setDataDaerah({
       ...dataDaerah,
-      provinces: provinces,
+      province: provinces,
       city: regencies,
-      districts: districts,
+      district: districts,
     });
   }, [provinces, regencies, districts]);
 
