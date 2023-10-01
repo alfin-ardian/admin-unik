@@ -185,7 +185,7 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
       ),
     },
     {
-      title: "Nama Daerah",
+      title: "Nama Kelompok",
       dataIndex: "name",
       key: "name",
       width: "15%",
