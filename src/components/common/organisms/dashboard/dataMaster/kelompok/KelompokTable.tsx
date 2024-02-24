@@ -25,7 +25,6 @@ interface Props {
 export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(kelompok, "kelompok");
   const dataNew: DataType[] = kelompok?.map((item: any) => ({
     id: item._id,
     daerah: item.daerah,
@@ -47,6 +46,7 @@ export const KelompokTable: React.FC<Props> = ({ kelompok }) => {
     address: item.address,
     latitude: item.latitude,
     longitude: item.longitude,
+    tim_pernikahan: item?.tim_pernikahan,
   }));
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");

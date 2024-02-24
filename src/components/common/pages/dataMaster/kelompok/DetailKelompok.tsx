@@ -82,6 +82,16 @@ export const DetailKelompok: React.FC = () => {
       });
   };
 
+  const handleAddTimPernikahan = () => {
+    setDataKelompok({
+      ...dataKelompok,
+      tim_pernikahan: [
+        ...dataKelompok.tim_pernikahan,
+        { name: "", whatsapp: "" },
+      ],
+    });
+  };
+
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
@@ -91,6 +101,9 @@ export const DetailKelompok: React.FC = () => {
               <Button onClick={() => setIsEdit(!isEdit)}>Batal</Button>
               <Button htmlType="submit" onClick={() => onUpdate()}>
                 Submit
+              </Button>
+              <Button onClick={handleAddTimPernikahan}>
+                Tambah Tim Pernikahan
               </Button>
             </>
           ) : (
@@ -164,7 +177,7 @@ export const DetailKelompok: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Tim Pernikahan" name="staff">
+              {/* <Form.Item label="Tim Pernikahan" name="staff">
                 <Input
                   defaultValue={dataKelompok?.staff}
                   disabled={!isEdit}
@@ -184,7 +197,30 @@ export const DetailKelompok: React.FC = () => {
                     })
                   }
                 />
-              </Form.Item>
+              </Form.Item> */}
+              {dataKelompok?.tim_pernikahan?.map((item: any, index: number) => (
+                <Form.Item
+                  label={`Tim Pernikahan ${index + 1}`}
+                  name={`tim_pernikahan[${index}].name`}
+                >
+                  <Input
+                    defaultValue={item?.name}
+                    disabled={!isEdit}
+                    onChange={(e: any) => {
+                      const updatedData = [...dataKelompok.tim_pernikahan];
+                      updatedData[index] = {
+                        ...updatedData[index],
+                        name: e.target.value,
+                      };
+
+                      setDataKelompok({
+                        ...dataKelompok,
+                        tim_pernikahan: updatedData,
+                      });
+                    }}
+                  />
+                </Form.Item>
+              ))}
               <Form.Item label="Provinsi" name="province">
                 <SelectProvinces
                   setProvinces={setProvinces}
@@ -261,7 +297,7 @@ export const DetailKelompok: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
+              {/* <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
                   defaultValue={dataKelompok?.whatsapp_staff}
                   disabled={!isEdit}
@@ -284,7 +320,31 @@ export const DetailKelompok: React.FC = () => {
                     })
                   }
                 />
-              </Form.Item>
+              </Form.Item> */}
+              {dataKelompok?.tim_pernikahan?.map((item: any, index: number) => (
+                <Form.Item
+                  label={`Whatsapp Tim Pernikahan ${index + 1}`}
+                  // name="tim_pernikahan"
+                  name={`tim_pernikahan[${index}].whatsapp`}
+                >
+                  <Input
+                    defaultValue={item?.whatsapp}
+                    disabled={!isEdit}
+                    onChange={(e: any) => {
+                      const updatedData = [...dataKelompok.tim_pernikahan];
+                      updatedData[index] = {
+                        ...updatedData[index],
+                        whatsapp: e.target.value,
+                      };
+
+                      setDataKelompok({
+                        ...dataKelompok,
+                        tim_pernikahan: updatedData,
+                      });
+                    }}
+                  />
+                </Form.Item>
+              ))}
               <Form.Item label="Kab / Kota" name="city">
                 <SelectRegencies
                   setRegencies={setRegencies}
@@ -327,7 +387,7 @@ export const DetailKelompok: React.FC = () => {
         >
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: API_GOOGLE_MAP,
+              key: "AIzaSyCLzjv60dsQJnTgVG3OQO3tESWVTyQuXo8",
               libraries: ["places", "geometry", "drawing", "visualization"],
             }}
             center={center}
@@ -342,7 +402,7 @@ export const DetailKelompok: React.FC = () => {
           </GoogleMapReact>
         </div>
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };

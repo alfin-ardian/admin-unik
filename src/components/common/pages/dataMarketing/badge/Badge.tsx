@@ -7,8 +7,6 @@ import { BadgeTable } from "@components/common/organisms";
 export const Badge: React.FC = () => {
   const navigate = useNavigate();
   const { data: badge } = useGetBadge();
-
-  console.log(badge?.data, "badge");
   return (
     <div className="container bg-white" style={{ borderRadius: "10px" }}>
       <div className="flex justify-end p-4">

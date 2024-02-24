@@ -18,8 +18,8 @@ interface Props {
   text: string;
   onClick?: () => void;
   style?: any;
-  lat: number;
-  lng: number;
+  lat: any;
+  lng: any;
 }
 
 const AnyReactComponent: React.FC<Props> = ({ text, onClick, style }) => (
@@ -40,7 +40,9 @@ export const AddKelompok: React.FC = () => {
   const [provinces, setProvinces] = useState<any>({});
   const [regencies, setRegencies] = useState<any>({ province_code: "" });
   const [districts, setDistricts] = useState<any>({ regency_code: "" });
-  const [dataKelompok, setDataKelompok] = useState<any>({});
+  const [dataKelompok, setDataKelompok] = useState<any>({
+    tim_pernikahan: [{ name: "", whatsapp: "" }],
+  });
   const [daerah, setDaerah] = useState<any>({});
   const [desa, setDesa] = useState<any>({});
 
@@ -80,6 +82,16 @@ export const AddKelompok: React.FC = () => {
       });
   };
 
+  const handleAddTimPernikahan = () => {
+    setDataKelompok({
+      ...dataKelompok,
+      tim_pernikahan: [
+        ...dataKelompok.tim_pernikahan,
+        { name: "", whatsapp: "" },
+      ],
+    });
+  };
+
   return (
     <>
       <div className="bg-white p-4" style={{ borderRadius: "10px" }}>
@@ -87,6 +99,9 @@ export const AddKelompok: React.FC = () => {
           <Button onClick={() => navigate(-1)}>Kembali</Button>
           <Button htmlType="submit" onClick={() => onUpdate()}>
             Submit
+          </Button>
+          <Button onClick={handleAddTimPernikahan}>
+            Tambah Tim Pernikahan
           </Button>
         </div>
         <Form
@@ -146,15 +161,29 @@ export const AddKelompok: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Tim Pernikahan" name="staff">
-                <Input
-                  defaultValue={dataKelompok?.staff}
-                  onChange={(e: any) =>
-                    setDataKelompok({ ...dataKelompok, staff: e.target.value })
-                  }
-                />
-              </Form.Item>
-              <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
+              {dataKelompok?.tim_pernikahan?.map((item: any, index: number) => (
+                <Form.Item
+                  label={`Tim Pernikahan ${index + 1}`}
+                  name={`tim_pernikahan[${index}].name`}
+                >
+                  <Input
+                    defaultValue={item?.name}
+                    onChange={(e: any) => {
+                      const updatedData = [...dataKelompok.tim_pernikahan];
+                      updatedData[index] = {
+                        ...updatedData[index],
+                        name: e.target.value,
+                      };
+
+                      setDataKelompok({
+                        ...dataKelompok,
+                        tim_pernikahan: updatedData,
+                      });
+                    }}
+                  />
+                </Form.Item>
+              ))}
+              {/* <Form.Item label="Wakil Tim Pernikahan" name="vice_staff">
                 <Input
                   defaultValue={dataKelompok?.vice_staff}
                   onChange={(e: any) =>
@@ -164,7 +193,7 @@ export const AddKelompok: React.FC = () => {
                     })
                   }
                 />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Provinsi" name="province">
                 <SelectProvinces
                   setProvinces={setProvinces}
@@ -230,7 +259,30 @@ export const AddKelompok: React.FC = () => {
                   }
                 />
               </Form.Item>
-              <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
+              {dataKelompok?.tim_pernikahan?.map((item: any, index: number) => (
+                <Form.Item
+                  label={`Whatsapp Tim Pernikahan ${index + 1}`}
+                  // name="tim_pernikahan"
+                  name={`tim_pernikahan[${index}].whatsapp`}
+                >
+                  <Input
+                    defaultValue={item?.whatsapp}
+                    onChange={(e: any) => {
+                      const updatedData = [...dataKelompok.tim_pernikahan];
+                      updatedData[index] = {
+                        ...updatedData[index],
+                        whatsapp: e.target.value,
+                      };
+
+                      setDataKelompok({
+                        ...dataKelompok,
+                        tim_pernikahan: updatedData,
+                      });
+                    }}
+                  />
+                </Form.Item>
+              ))}
+              {/* <Form.Item label="Whatsapp Tim Pernikahan" name="whatsapp_staff">
                 <Input
                   defaultValue={dataKelompok?.whatsapp_staff}
                   onChange={(e: any) =>
@@ -251,7 +303,7 @@ export const AddKelompok: React.FC = () => {
                     })
                   }
                 />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item label="Kab / Kota" name="city">
                 <SelectRegencies
                   setRegencies={setRegencies}
@@ -291,7 +343,7 @@ export const AddKelompok: React.FC = () => {
         >
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: API_GOOGLE_MAP,
+              key: "AIzaSyCLzjv60dsQJnTgVG3OQO3tESWVTyQuXo8",
               libraries: ["places", "geometry", "drawing", "visualization"],
             }}
             center={center}
@@ -306,7 +358,7 @@ export const AddKelompok: React.FC = () => {
           </GoogleMapReact>
         </div>
       </div>
-      <Toaster />
+      {/* <Toaster /> */}
     </>
   );
 };
