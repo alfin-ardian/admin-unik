@@ -310,7 +310,10 @@ export const UserTable: React.FC<Props> = ({ kelompok }) => {
 
   return (
     <>
-      <Table columns={columns} dataSource={dataNew} />
+      <div className="overflow-x-auto">
+        <Table columns={columns} dataSource={dataNew}
+          scroll={{ x: "max-content" }} />
+      </div>
       <Toaster />
     </>
   );
