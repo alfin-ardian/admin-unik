@@ -8,9 +8,9 @@ import {
   DaerahIcon,
   DesaIcon,
   KelompokIcon,
-  BadgeIcon,
-  PesananIcon,
-  AdsenseIcon,
+  // BadgeIcon,
+  // PesananIcon,
+  // AdsenseIcon,
 } from "@components/common/atoms";
 
 interface Props {
@@ -93,7 +93,7 @@ export const SidebarMenuList: React.FC<Props> = ({
         collapse={collapse}
         icon={<KelompokIcon />}
       />
-      <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
+      {/* <p className="title mt-2 border-t border-b p-4">Data Marketing</p>
       <SidebarMenuListing
         setBreadcrumb={setBreadcrumb}
         to={"/badge"}
@@ -117,7 +117,7 @@ export const SidebarMenuList: React.FC<Props> = ({
         active={isRoot}
         collapse={collapse}
         icon={<AdsenseIcon />}
-      />
+      /> */}
     </div>
   );
 };
